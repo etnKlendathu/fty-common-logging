@@ -1,0 +1,37 @@
+<project
+    name = "fty-log"
+    description = "Provides common logs"
+    script = "zproject.gsl"
+    email = "EatonIPCOpenSource@eaton.com"
+    url = "https://42ity.org"
+    license = "GPL-2.0+"
+    repository = "https://github.com/42ity/fty-log"
+    header = "fty-log/fty_logs.h"
+    >
+
+    <target name = "debian" />
+    <target name = "redhat" />
+    <target name = "travis" />
+    <target name = "jenkins" >
+        <option name = "agent_label" value = "devel-image &amp;&amp; x86_64" />
+        <option name = "triggers_pollSCM" value = "H/2 * * * *" />
+        <option name = "test_cppcheck" value = "1" />
+        <option name = "build_docs" value = "1" />
+        <option name = "dist_docs" value = "1" />
+    </target>
+
+    <include filename = "license.xml" />
+    <version major = "1" minor = "0" patch = "0" />
+    <abi current = "1" revision = "0" age = "0" />
+
+    <classfilename use-cxx = "true" source-extension = "cc" header-extension = "h"
+        pretty-print = "no" keep-tree = "true" />
+
+    <use project = "log4cplus" header = "log4cplus/logger.h"
+        test = "appender_test"
+        release="1.1.2-FTY-master"
+        repository="https://github.com/42ity/log4cplus.git" />
+
+    <class name = "fty-log/fty_log">Log management</class>
+    
+</project>
