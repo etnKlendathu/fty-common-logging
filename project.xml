@@ -27,11 +27,15 @@
     <classfilename use-cxx = "true" source-extension = "cc" header-extension = "h"
         pretty-print = "no" keep-tree = "true" />
 
+    <use project = "fty-common" libname = "libfty_common" header="fty_common.h"
+        repository = "https://github.com/42ity/fty-common.git"
+        test = "fty_commmon_selftest" />
+
     <use project = "log4cplus" header = "log4cplus/logger.h"
         test = "appender_test"
         release="1.1.2-FTY-master"
         repository="https://github.com/42ity/log4cplus.git" />
 
-    <class name = "fty-log/fty_log">Log management</class>
+    <class name = "fty-log/fty_log" selftest = "0">Log management</class>
     
 </project>
