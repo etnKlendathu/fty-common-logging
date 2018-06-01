@@ -1,0 +1,3 @@
+usr/include/*
+usr/lib/*/libfty_log.so
+usr/lib/*/pkgconfig/libfty_log.pc

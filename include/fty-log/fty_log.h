@@ -22,6 +22,17 @@
 #ifndef FTY_LOG_H_INCLUDED
 #define FTY_LOG_H_INCLUDED
 
+#include <string.h>
+
+#define STR(X) #X
+
+#ifndef srteq
+#define streq(s1,s2) (!strcmp ((s1), (s2)))
+#endif
+
+//  Include the project library file
+#include "fty_log_library.h"
+
 #ifdef __cplusplus
 #include <cxxtools/log.h>
 #endif

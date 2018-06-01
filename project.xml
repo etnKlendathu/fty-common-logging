@@ -6,8 +6,7 @@
     url = "https://42ity.org"
     license = "GPL-2.0+"
     repository = "https://github.com/42ity/fty-log"
-    header = "fty-log/fty_logs.h"
-    >
+    header = "fty-log/fty_log.h">
 
     <target name = "debian" />
     <target name = "redhat" />
@@ -26,10 +25,6 @@
 
     <classfilename use-cxx = "true" source-extension = "cc" header-extension = "h"
         pretty-print = "no" keep-tree = "true" />
-
-    <use project = "fty-common" libname = "libfty_common" header="fty_common.h"
-        repository = "https://github.com/42ity/fty-common.git"
-        test = "fty_commmon_selftest" />
 
     <use project = "log4cplus" header = "log4cplus/logger.h"
         test = "appender_test"
