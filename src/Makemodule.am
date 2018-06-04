@@ -17,7 +17,7 @@ src_libfty_log_la_SOURCES = \
 
 if ENABLE_DRAFTS
 src_libfty_log_la_SOURCES += \
-    src/fty-log/fty_log.cc
+    src/fty-log/fty_logger.cc
 
 endif
 

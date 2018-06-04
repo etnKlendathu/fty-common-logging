@@ -3,12 +3,12 @@
 #  Read the zproject/README.md for information about making permanent changes. #
 ################################################################################
 nobase_include_HEADERS = \
-    fty-log/fty_log.h \
+    fty_log.h \
     fty_log_library.h
 
 if ENABLE_DRAFTS
 nobase_include_HEADERS += \
-    fty-log/fty_log.h
+    fty-log/fty_logger.h
 
 endif
 

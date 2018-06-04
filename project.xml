@@ -6,7 +6,7 @@
     url = "https://42ity.org"
     license = "GPL-2.0+"
     repository = "https://github.com/42ity/fty-log"
-    header = "fty-log/fty_log.h">
+    header = "fty_log.h">
 
     <target name = "debian" />
     <target name = "redhat" />
@@ -18,6 +18,8 @@
         <option name = "build_docs" value = "1" />
         <option name = "dist_docs" value = "1" />
     </target>
+
+    <classfilename keep-tree = "true" pkgincludedir = "false" use-cxx = "true" pretty-print = "no" source-extension = "cc" />
 
     <include filename = "license.xml" />
     <version major = "1" minor = "0" patch = "0" />
@@ -31,6 +33,6 @@
         release="1.1.2-FTY-master"
         repository="https://github.com/42ity/log4cplus.git" />
 
-    <class name = "fty-log/fty_log" selftest = "0">Log management</class>
+    <class name = "fty-log/fty_logger" selftest = "0">Log management</class>
     
 </project>

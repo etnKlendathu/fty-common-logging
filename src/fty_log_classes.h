@@ -30,7 +30,7 @@
 #include "platform.h"
 
 //  External API
-#include "../include/fty-log/fty_log.h"
+#include "../include/fty_log.h"
 
 //  Extra headers
 
