@@ -190,42 +190,19 @@ The following macros are defined :
 Add this bloc in the project.xml file :   
 
 ````
-<use project = "fty-common" libname = "libfty_common" header="fty_common.h"
+<use project = "fty-log" libname = "libfty_log" header="fty_log.h"
         repository = "https://github.com/42ity/fty-common.git"
-        test = "fty_commmon_selftest" >
-        <use project = "log4cplus" header = "log4cplus/logger.h"
-        test = "appender_test" release="1.1.2-FTY-master" repository="https://github.com/42ity/log4cplus.git" />
-        <use project = "czmq"
-            repository="https://github.com/42ity/czmq.git" release = "v3.0.2-FTY-master"
-            min_major = "3" min_minor = "0" min_patch = "2" >
-            <use project = "libzmq"
-                repository="https://github.com/42ity/libzmq.git" release = "4.2.0-FTY-master" >
-                <use project = "libsodium" prefix = "sodium"
-                    repository = "https://github.com/42ity/libsodium.git"
-                    release = "1.0.5-FTY-master"
-                    test = "sodium_init" />
-            </use>
-        </use>
-
-        <use project = "cxxtools" test="cxxtools::Utf8Codec::Utf8Codec" header="cxxtools/allocator.h"
-            repository = "https://github.com/42ity/cxxtools.git"
-            release = "2.2-FTY-master"
-            />
-
-        <use project = "libtntnet" optional = "1"
-            repository = "https://github.com/42ity/tntnet.git"
-            release = "2.2-FTY-master"
-            />
-
-        <use project = "tntdb"
-            test="tntdb::Date::gmtime"
-            repository = "https://github.com/42ity/tntdb.git"
-            release = "1.3-FTY-master"
-            builddir = "tntdb" />
-    </use>
+        test = "fty_log_selftest" >
+    <use project = "log4cplus" header = "log4cplus/logger.h"
+    test = "appender_test" release="1.1.2-FTY-master" repository="https://github.com/42ity/log4cplus.git" />
+    <use project = "cxxtools" test="cxxtools::Utf8Codec::Utf8Codec" header="cxxtools/allocator.h"
+        repository = "https://github.com/42ity/cxxtools.git"
+        release = "2.2-FTY-master"
+        />
+</use>
 ````  
 
-The header value must be change from fty_common.h to fty-common/log/fty_log.h for C project.  
+The header value must be change from fty_log.h to fty-log/fty_logger.h for C project.  
 In this use section, remove the dependecy already needed byt the agent/library.
 
 ### How to pass travis check
