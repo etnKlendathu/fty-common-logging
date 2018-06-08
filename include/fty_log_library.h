@@ -30,6 +30,7 @@
 //  Set up environment for the application
 
 //  External dependencies
+#include <cxxtools/allocator.h>
 #include <log4cplus/logger.h>
 
 //  FTY_LOG version macros for compile-time API detection
