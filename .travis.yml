@@ -50,6 +50,7 @@ env:
   matrix:
     - BUILD_TYPE=default
     - BUILD_TYPE=default-Werror
+### Note: we don't use CMake
 #   - BUILD_TYPE=cmake
 #   - BUILD_TYPE=android
 #   - BUILD_TYPE=check-py
@@ -60,11 +61,12 @@ pkg_deps_prereqs_distro: &pkg_deps_prereqs_distro
 # Prerequisite packages that may be built from source or used from
 # prebuilt packages of that source (usually not from an OS distro)
 pkg_deps_prereqs_source: &pkg_deps_prereqs_source
-#   - cxxtools-dev
-#   - log4cplus-dev
+    - cxxtools-dev
+    - log4cplus-dev
 
+# NOTE: Our forks are checked out and built without pkg dependencies in use
 pkg_deps_prereqs: &pkg_deps_prereqs
-    - *pkg_deps_prereqs_source
+#    - *pkg_deps_prereqs_source
     - *pkg_deps_prereqs_distro
 
 pkg_deps_doctools: &pkg_deps_doctools
@@ -119,7 +121,8 @@ matrix:
         sources: *pkg_src_zeromq_ubuntu14
         packages:
         - *pkg_deps_common
-# - env: BUILD_TYPE=cmake DO_CLANG_FORMAT_CHECK=1 CLANG_FORMAT=clang-format-5.0
+### Note: we don't use CMake
+#  - env: BUILD_TYPE=cmake DO_CLANG_FORMAT_CHECK=1 CLANG_FORMAT=clang-format-5.0
 # For non-cmake users, there is an autotools solution with a bit more overhead
 # to have dependencies ready and pass configure script before making this check).
 # Note that the autotools variant will also require dependencies preinstalled to
@@ -134,7 +137,7 @@ matrix:
         packages:
         - clang-5.0
         - clang-format-5.0
-#autotools#        - *pkg_deps_prereqs
+        - *pkg_deps_prereqs
 
 before_install:
 - if [ "$TRAVIS_OS_NAME" == "osx" -a "$BUILD_TYPE" == "android" ] ; then brew install binutils ; fi

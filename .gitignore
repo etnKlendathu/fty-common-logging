@@ -1,6 +1,9 @@
 # This is a skeleton created by zproject.
 # You can add hand-written code here.
+### Note: Customized after generation; take care upon regens
+
 save.xml
+
 # Object files
 *.o
 *.so
@@ -28,7 +31,7 @@ src/fty_log_selftest
 *.app
 core
 
- # Distcheck workspace and archives
+# Distcheck workspace and archives
 fty-log-*/
 fty-log-*.tar.gz
 fty-log-*.zip
@@ -71,7 +74,13 @@ DartConfiguration.tcl
 install_manifest.txt
 Testing/
 
+# CMake in general
+builds/cmake/
+CMake*
+*.cmake
+
 # Repositories downloaded by CI integration scripts
+cxxtools/
 log4cplus/
 
 # Travis build area
@@ -101,7 +110,7 @@ src/app/gen/
 src/app/obj/
 src/app/local.properties
 
-# Android -dependencies
+# Android - dependencies
 src/app/jni/output
 
 # Python build directory
@@ -122,6 +131,9 @@ bindings/qt/selftest/selftest
 *.swp
 *.bak
 .test*
+
+# Netbeans directory
+nbproject/
 
 # editor backups
 *~
