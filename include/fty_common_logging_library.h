@@ -1,5 +1,5 @@
 /*  =========================================================================
-    fty-log - generated layer of public API
+    fty-common-logging - generated layer of public API
 
     Copyright (C) 2014 - 2018 Eaton
 
@@ -24,8 +24,8 @@
     =========================================================================
 */
 
-#ifndef FTY_LOG_LIBRARY_H_INCLUDED
-#define FTY_LOG_LIBRARY_H_INCLUDED
+#ifndef FTY_COMMON_LOGGING_LIBRARY_H_INCLUDED
+#define FTY_COMMON_LOGGING_LIBRARY_H_INCLUDED
 
 //  Set up environment for the application
 
@@ -33,76 +33,76 @@
 #include <cxxtools/allocator.h>
 #include <log4cplus/logger.h>
 
-//  FTY_LOG version macros for compile-time API detection
-#define FTY_LOG_VERSION_MAJOR 1
-#define FTY_LOG_VERSION_MINOR 0
-#define FTY_LOG_VERSION_PATCH 0
+//  FTY_COMMON_LOGGING version macros for compile-time API detection
+#define FTY_COMMON_LOGGING_VERSION_MAJOR 1
+#define FTY_COMMON_LOGGING_VERSION_MINOR 0
+#define FTY_COMMON_LOGGING_VERSION_PATCH 0
 
-#define FTY_LOG_MAKE_VERSION(major, minor, patch) \
+#define FTY_COMMON_LOGGING_MAKE_VERSION(major, minor, patch) \
     ((major) * 10000 + (minor) * 100 + (patch))
-#define FTY_LOG_VERSION \
-    FTY_LOG_MAKE_VERSION(FTY_LOG_VERSION_MAJOR, FTY_LOG_VERSION_MINOR, FTY_LOG_VERSION_PATCH)
+#define FTY_COMMON_LOGGING_VERSION \
+    FTY_COMMON_LOGGING_MAKE_VERSION(FTY_COMMON_LOGGING_VERSION_MAJOR, FTY_COMMON_LOGGING_VERSION_MINOR, FTY_COMMON_LOGGING_VERSION_PATCH)
 
 #if defined (__WINDOWS__)
-#   if defined FTY_LOG_STATIC
-#       define FTY_LOG_EXPORT
-#   elif defined FTY_LOG_INTERNAL_BUILD
+#   if defined FTY_COMMON_LOGGING_STATIC
+#       define FTY_COMMON_LOGGING_EXPORT
+#   elif defined FTY_COMMON_LOGGING_INTERNAL_BUILD
 #       if defined DLL_EXPORT
-#           define FTY_LOG_EXPORT __declspec(dllexport)
+#           define FTY_COMMON_LOGGING_EXPORT __declspec(dllexport)
 #       else
-#           define FTY_LOG_EXPORT
+#           define FTY_COMMON_LOGGING_EXPORT
 #       endif
-#   elif defined FTY_LOG_EXPORTS
-#       define FTY_LOG_EXPORT __declspec(dllexport)
+#   elif defined FTY_COMMON_LOGGING_EXPORTS
+#       define FTY_COMMON_LOGGING_EXPORT __declspec(dllexport)
 #   else
-#       define FTY_LOG_EXPORT __declspec(dllimport)
+#       define FTY_COMMON_LOGGING_EXPORT __declspec(dllimport)
 #   endif
-#   define FTY_LOG_PRIVATE
+#   define FTY_COMMON_LOGGING_PRIVATE
 #elif defined (__CYGWIN__)
-#   define FTY_LOG_EXPORT
-#   define FTY_LOG_PRIVATE
+#   define FTY_COMMON_LOGGING_EXPORT
+#   define FTY_COMMON_LOGGING_PRIVATE
 #else
 #   if (defined __GNUC__ && __GNUC__ >= 4) || defined __INTEL_COMPILER
-#       define FTY_LOG_PRIVATE __attribute__ ((visibility ("hidden")))
-#       define FTY_LOG_EXPORT __attribute__ ((visibility ("default")))
+#       define FTY_COMMON_LOGGING_PRIVATE __attribute__ ((visibility ("hidden")))
+#       define FTY_COMMON_LOGGING_EXPORT __attribute__ ((visibility ("default")))
 #   else
-#       define FTY_LOG_PRIVATE
-#       define FTY_LOG_EXPORT
+#       define FTY_COMMON_LOGGING_PRIVATE
+#       define FTY_COMMON_LOGGING_EXPORT
 #   endif
 #endif
 
 //  Project has no stable classes, so we build the draft API
-#undef  FTY_LOG_BUILD_DRAFT_API
-#define FTY_LOG_BUILD_DRAFT_API
+#undef  FTY_COMMON_LOGGING_BUILD_DRAFT_API
+#define FTY_COMMON_LOGGING_BUILD_DRAFT_API
 
 //  Opaque class structures to allow forward references
 //  These classes are stable or legacy and built in all releases
 //  Draft classes are by default not built in stable releases
-#ifdef FTY_LOG_BUILD_DRAFT_API
+#ifdef FTY_COMMON_LOGGING_BUILD_DRAFT_API
 typedef struct _fty_log_fty_logger_t fty_log_fty_logger_t;
 #define FTY_LOG_FTY_LOGGER_T_DEFINED
-#endif // FTY_LOG_BUILD_DRAFT_API
+#endif // FTY_COMMON_LOGGING_BUILD_DRAFT_API
 
 
 //  Public classes, each with its own header file
-#ifdef FTY_LOG_BUILD_DRAFT_API
+#ifdef FTY_COMMON_LOGGING_BUILD_DRAFT_API
 #include "fty-log/fty_logger.h"
-#endif // FTY_LOG_BUILD_DRAFT_API
+#endif // FTY_COMMON_LOGGING_BUILD_DRAFT_API
 
-#ifdef FTY_LOG_BUILD_DRAFT_API
+#ifdef FTY_COMMON_LOGGING_BUILD_DRAFT_API
 
 #ifdef __cplusplus
 extern "C" {
 #endif
 
 //  Self test for private classes
-FTY_LOG_EXPORT void
-    fty_log_private_selftest (bool verbose, const char *subtest);
+FTY_COMMON_LOGGING_EXPORT void
+    fty_common_logging_private_selftest (bool verbose, const char *subtest);
 
 #ifdef __cplusplus
 }
 #endif
-#endif // FTY_LOG_BUILD_DRAFT_API
+#endif // FTY_COMMON_LOGGING_BUILD_DRAFT_API
 
 #endif
 /*

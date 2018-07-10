@@ -1,5 +1,5 @@
 /*  =========================================================================
-    fty-log - Provides common logs
+    fty-common-logging - Provides common logs
 
     Copyright (C) 2014 - 2018 Eaton
 
@@ -23,7 +23,7 @@
 #define FTY_LOG_H_H_INCLUDED
 
 //  Include the project library file
-#include "fty_log_library.h"
+#include "fty_common_logging_library.h"
 
 //  Add your own public definitions here, if you need them
 

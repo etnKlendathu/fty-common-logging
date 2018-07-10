@@ -4,7 +4,7 @@
 ################################################################################
 nobase_include_HEADERS = \
     fty_log.h \
-    fty_log_library.h
+    fty_common_logging_library.h
 
 if ENABLE_DRAFTS
 nobase_include_HEADERS += \

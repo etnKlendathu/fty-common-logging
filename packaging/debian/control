@@ -1,5 +1,5 @@
 #
-#    fty-log - Provides common logs
+#    fty-common-logging - Provides common logs
 #
 #    Copyright (C) 2014 - 2018 Eaton
 #
@@ -17,10 +17,10 @@
 #    with this program; if not, write to the Free Software Foundation, Inc.,
 #    51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 
-Source:         fty-log
+Source:         fty-common-logging
 Section:        net
 Priority:       optional
-Maintainer:     fty-log Developers <eatonipcopensource@eaton.com>
+Maintainer:     fty-common-logging Developers <eatonipcopensource@eaton.com>
 Standards-Version: 4.0.1.0
 Build-Depends: debhelper (>= 9),
     pkg-config,
@@ -29,33 +29,33 @@ Build-Depends: debhelper (>= 9),
     asciidoc-base | asciidoc, xmlto,
     dh-autoreconf
 
-Package: libfty-log1
+Package: libfty-common-logging1
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends}
-Description: fty-log shared library
- This package contains shared library for fty-log:
+Description: fty-common-logging shared library
+ This package contains shared library for fty-common-logging:
  provides common logs
 
-Package: libfty-log-dev
+Package: libfty-common-logging-dev
 Architecture: any
 Section: libdevel
 Depends:
     ${misc:Depends},
     libcxxtools-dev,
     liblog4cplus-dev,
-    libfty-log1 (= ${binary:Version})
-Description: fty-log development tools
- This package contains development files for fty-log:
+    libfty-common-logging1 (= ${binary:Version})
+Description: fty-common-logging development tools
+ This package contains development files for fty-common-logging:
  provides common logs
 
 
-Package: fty-log-dbg
+Package: fty-common-logging-dbg
 Architecture: any
 Section: debug
 Priority: optional
 Depends:
-    libfty-log1 (= ${binary:Version}),
+    libfty-common-logging1 (= ${binary:Version}),
     ${misc:Depends}
-Description: fty-log debugging symbols
- This package contains the debugging symbols for fty-log:
+Description: fty-common-logging debugging symbols
+ This package contains the debugging symbols for fty-common-logging:
  provides common logs.

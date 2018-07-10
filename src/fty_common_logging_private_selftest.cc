@@ -1,5 +1,5 @@
 /*  =========================================================================
-    fty_log_private_selftest.c - run private classes selftests
+    fty_common_logging_private_selftest.c - run private classes selftests
 
     Runs all private classes selftests.
 
@@ -27,7 +27,7 @@
     =========================================================================
 */
 
-#include "fty_log_classes.h"
+#include "fty_common_logging_classes.h"
 
 
 //  -------------------------------------------------------------------------
@@ -35,7 +35,7 @@
 //
 
 void
-fty_log_private_selftest (bool verbose, const char *subtest)
+fty_common_logging_private_selftest (bool verbose, const char *subtest)
 {
 }
 /*

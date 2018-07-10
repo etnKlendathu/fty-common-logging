@@ -5,7 +5,7 @@
 
 # Ignore files generated from .in templates
 # + pkgconfig:
-libfty_log.pc
+libfty_common_logging.pc
 # + main->extra sources (if any):
 
 # + config files for mains (if any):

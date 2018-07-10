@@ -45,7 +45,7 @@ endif
 
 EXTRA_DIST += \
     README.md \
-    src/fty_log_classes.h
+    src/fty_common_logging_classes.h
 
 # NOTE: this "include" syntax is not a "make" but an "autotools" keyword,
 # see https://www.gnu.org/software/automake/manual/html_node/Include.html

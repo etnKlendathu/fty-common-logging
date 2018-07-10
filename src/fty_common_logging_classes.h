@@ -1,5 +1,5 @@
 /*  =========================================================================
-    fty_log_classes - private header file
+    fty_common_logging_classes - private header file
 
     Copyright (C) 2014 - 2018 Eaton
 
@@ -23,8 +23,8 @@
     =========================================================================
 */
 
-#ifndef FTY_LOG_CLASSES_H_INCLUDED
-#define FTY_LOG_CLASSES_H_INCLUDED
+#ifndef FTY_COMMON_LOGGING_CLASSES_H_INCLUDED
+#define FTY_COMMON_LOGGING_CLASSES_H_INCLUDED
 
 //  Platform definitions, must come first
 #include "platform.h"
@@ -40,12 +40,12 @@
 
 
 //  *** To avoid double-definitions, only define if building without draft ***
-#ifndef FTY_LOG_BUILD_DRAFT_API
+#ifndef FTY_COMMON_LOGGING_BUILD_DRAFT_API
 
 //  Self test for private classes
-FTY_LOG_PRIVATE void
-    fty_log_private_selftest (bool verbose, const char *subtest);
+FTY_COMMON_LOGGING_PRIVATE void
+    fty_common_logging_private_selftest (bool verbose, const char *subtest);
 
-#endif // FTY_LOG_BUILD_DRAFT_API
+#endif // FTY_COMMON_LOGGING_BUILD_DRAFT_API
 
 #endif

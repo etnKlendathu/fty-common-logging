@@ -1,9 +1,9 @@
 Format: https://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
-Upstream-Name: fty-log
+Upstream-Name: fty-common-logging
 
 Files: *
-Copyright: 2015- fty-log Developers <eatonipcopensource@eaton.com>
-License: fty-log_license
+Copyright: 2015- fty-common-logging Developers <eatonipcopensource@eaton.com>
+License: fty-common-logging_license
  Copyright (C) 2014 - 2018 Eaton
  .
  This program is free software; you can redistribute it and/or modify

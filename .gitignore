@@ -24,17 +24,17 @@ save.xml
 *.lo
 
 # Executables
-src/fty-log_selftest
-src/fty_log_selftest
+src/fty-common-logging_selftest
+src/fty_common_logging_selftest
 *.exe
 *.out
 *.app
 core
 
 # Distcheck workspace and archives
-fty-log-*/
-fty-log-*.tar.gz
-fty-log-*.zip
+fty-common-logging-*/
+fty-common-logging-*.tar.gz
+fty-common-logging-*.zip
 
 # Man pages
 doc/*.1
@@ -63,6 +63,7 @@ src/platform.h.in~
 src/stamp-h1
 src/test-suite.log
 src/.dirstamp
+src/fty-log/.dirstamp
 
 # CMake cache
 CMakeCache.txt

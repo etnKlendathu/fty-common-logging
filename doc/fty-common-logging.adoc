@@ -4,13 +4,13 @@ Name(7)
 
 NAME
 ----
-fty-log - Overview of Provides common logs
+fty-common-logging - Overview of Provides common logs
 
 
 SYNOPSIS
 --------
 
-Project fty-log aims to ... (short marketing pitch)
+Project fty-common-logging aims to ... (short marketing pitch)
 
 It delivers several programs with their respective man pages:
 
@@ -21,7 +21,7 @@ Generally you can compile and link against it like this:
 ----
 #include <fty_log.h>
 
-cc ['flags'] 'files' -lfty_log ['libraries']
+cc ['flags'] 'files' -lfty_common_logging ['libraries']
 ----
 
 

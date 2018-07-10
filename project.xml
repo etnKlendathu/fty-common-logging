@@ -1,5 +1,5 @@
 <project
-    name = "fty-log"
+    name = "fty-common-logging"
     description = "Provides common logs"
     script = "zproject.gsl"
     email = "EatonIPCOpenSource@eaton.com"
@@ -40,6 +40,6 @@
         release = "1.1.2-FTY-master"
         />
 
-    <class name = "fty-log/fty_logger" selftest = "0">Log management</class>
+    <class name = "fty-log/fty_logger" selftest = "0" stable = "1">Log management</class>
 
 </project>
