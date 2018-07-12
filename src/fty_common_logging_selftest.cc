@@ -1,5 +1,5 @@
 /*  =========================================================================
-    fty_log_selftest.c - run selftests
+    fty_common_logging_selftest.c - run selftests
 
     Runs all selftests.
 
@@ -27,7 +27,7 @@
     =========================================================================
 */
 
-#include "fty_log_classes.h"
+#include "fty_common_logging_classes.h"
 
 #ifndef streq
 /*
@@ -77,16 +77,16 @@ static void
 test_runall (bool verbose)
 {
     test_item_t *item;
-    printf ("Running fty-log selftests...\n");
+    printf ("Running fty-common-logging selftests...\n");
     for (item = all_tests; item->testname; item++) {
         if (streq (item->testname, "private_classes"))
             continue;
         if (!item->subtest)
             item->test (verbose);
-#ifdef FTY_LOG_BUILD_DRAFT_API // selftest is still in draft
+#ifdef FTY_COMMON_LOGGING_BUILD_DRAFT_API // selftest is still in draft
         else
-            fty_log_private_selftest (verbose, item->subtest);
-#endif // FTY_LOG_BUILD_DRAFT_API
+            fty_common_logging_private_selftest (verbose, item->subtest);
+#endif // FTY_COMMON_LOGGING_BUILD_DRAFT_API
     }
 
     printf ("Tests passed OK\n");
@@ -126,7 +126,7 @@ main (int argc, char **argv)
     for (argn = 1; argn < argc; argn++) {
         if (streq (argv [argn], "--help")
         ||  streq (argv [argn], "-h")) {
-            puts ("fty_log_selftest.c [options] ...");
+            puts ("fty_common_logging_selftest.c [options] ...");
             puts ("  --verbose / -v         verbose test output");
             puts ("  --number / -n          report number of tests");
             puts ("  --list / -l            list all tests");
@@ -183,13 +183,13 @@ main (int argc, char **argv)
     #endif //
 
     if (test) {
-        printf ("Running fty-log test '%s'...\n", test->testname);
+        printf ("Running fty-common-logging test '%s'...\n", test->testname);
         if (!test->subtest)
             test->test (verbose);
-#ifdef FTY_LOG_BUILD_DRAFT_API // selftest is still in draft
+#ifdef FTY_COMMON_LOGGING_BUILD_DRAFT_API // selftest is still in draft
         else
-            fty_log_private_selftest (verbose, test->subtest);
-#endif // FTY_LOG_BUILD_DRAFT_API
+            fty_common_logging_private_selftest (verbose, test->subtest);
+#endif // FTY_COMMON_LOGGING_BUILD_DRAFT_API
     }
     else
         test_runall (verbose);

@@ -38,7 +38,7 @@
 #include <log4cplus/consoleappender.h>
 #include <log4cplus/mdc.h>
 
-#include "fty_log_library.h"
+#include "fty_common_logging_library.h"
 
 using namespace log4cplus::helpers;
 

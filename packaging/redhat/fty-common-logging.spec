@@ -1,5 +1,5 @@
 #
-#    fty-log - Provides common logs
+#    fty-common-logging - Provides common logs
 #
 #    Copyright (C) 2014 - 2018 Eaton
 #
@@ -28,7 +28,7 @@
 %else
 %define DRAFTS no
 %endif
-Name:           fty-log
+Name:           fty-common-logging
 Version:        1.0.0
 Release:        1
 Summary:        provides common logs
@@ -52,38 +52,38 @@ BuildRequires:  log4cplus-devel
 BuildRoot:      %{_tmppath}/%{name}-%{version}-build
 
 %description
-fty-log provides common logs.
+fty-common-logging provides common logs.
 
-%package -n libfty_log1
+%package -n libfty_common_logging1
 Group:          System/Libraries
 Summary:        provides common logs shared library
 
-%description -n libfty_log1
-This package contains shared library for fty-log: provides common logs
+%description -n libfty_common_logging1
+This package contains shared library for fty-common-logging: provides common logs
 
-%post -n libfty_log1 -p /sbin/ldconfig
-%postun -n libfty_log1 -p /sbin/ldconfig
+%post -n libfty_common_logging1 -p /sbin/ldconfig
+%postun -n libfty_common_logging1 -p /sbin/ldconfig
 
-%files -n libfty_log1
+%files -n libfty_common_logging1
 %defattr(-,root,root)
-%{_libdir}/libfty_log.so.*
+%{_libdir}/libfty_common_logging.so.*
 
 %package devel
 Summary:        provides common logs
 Group:          System/Libraries
-Requires:       libfty_log1 = %{version}
+Requires:       libfty_common_logging1 = %{version}
 Requires:       cxxtools-devel
 Requires:       log4cplus-devel
 
 %description devel
 provides common logs development tools
-This package contains development files for fty-log: provides common logs
+This package contains development files for fty-common-logging: provides common logs
 
 %files devel
 %defattr(-,root,root)
 %{_includedir}/*
-%{_libdir}/libfty_log.so
-%{_libdir}/pkgconfig/libfty_log.pc
+%{_libdir}/libfty_common_logging.so
+%{_libdir}/pkgconfig/libfty_common_logging.pc
 %{_mandir}/man3/*
 %{_mandir}/man7/*
 

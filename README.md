@@ -1,4 +1,4 @@
-# fty-log
+# fty-common-logging
 
 This is a library providing :
 * A logging system based on the
@@ -8,7 +8,7 @@ This is a library providing :
 
 ## How to build
 
-To build the `fty-log` project run:
+To build the `fty-common-logging` project run:
 
 ```bash
 ./autogen.sh
@@ -98,7 +98,7 @@ The `...` section is a string followed by any parameters as in the `printf`
 family of functions.
 
 ### How to format log
-The logging system uses the format from `patternlayout` of `log4cplus` (see 
+The logging system uses the format from `patternlayout` of `log4cplus` (see
 http://log4cplus.sourceforge.net/docs/html/classlog4cplus_1_1PatternLayout.html
 for details).
 
@@ -119,7 +119,7 @@ log-default-67358592 [140004551534400] -INFO - log_fty_log_test (src/log/fty_log
 ````
 
 In your system, you can export an environment variable named `BIOS_LOG_PATTERN`
-to set a format pattern for all agents using `fty-log` and if the agent does
+to set a format pattern for all agents using `fty-common-logging` and if the agent does
 not use a specific log configuration file.
 
 ### Log configuration file
@@ -264,7 +264,7 @@ The following macros are defined :
 Add this block in the `project.xml` file :
 
 ````
-    <use project = "fty-log" libname = "libfty_log" header="fty_log.h"
+    <use project = "fty-common-logging" libname = "libfty_common_logging" header="fty_log.h"
         repository = "https://github.com/42ity/fty-log.git"
         release = "master"
         test = "fty_log_selftest" >

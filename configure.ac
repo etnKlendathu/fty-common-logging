@@ -13,7 +13,7 @@
 # Process this file with autoconf to produce a configure script.
 AC_PREREQ(2.61)
 #
-AC_INIT([fty-log],[1.0.0],[eatonipcopensource@eaton.com])
+AC_INIT([fty-common-logging],[1.0.0],[eatonipcopensource@eaton.com])
 
 AC_CONFIG_AUX_DIR(config)
 AC_CONFIG_MACRO_DIR(config)
@@ -26,11 +26,11 @@ PV_MAJOR=`echo $PACKAGE_VERSION | cut -d . -f 1`
 PV_MINOR=`echo $PACKAGE_VERSION | cut -d . -f 2`
 PV_PATCH=`echo $PACKAGE_VERSION | cut -d . -f 3`
 AC_DEFINE_UNQUOTED([PACKAGE_VERSION_MAJOR],[$PV_MAJOR],
-    [FTY_LOG major version])
+    [FTY_COMMON_LOGGING major version])
 AC_DEFINE_UNQUOTED([PACKAGE_VERSION_MINOR],[$PV_MINOR],
-    [FTY_LOG minor version])
+    [FTY_COMMON_LOGGING minor version])
 AC_DEFINE_UNQUOTED([PACKAGE_VERSION_PATCH],[$PV_PATCH],
-    [FTY_LOG patchlevel])
+    [FTY_COMMON_LOGGING patchlevel])
 # This lets us use PACKAGE_VERSION in Makefiles
 AC_SUBST(PACKAGE_VERSION)
 
@@ -41,7 +41,7 @@ AC_SUBST(PACKAGE_VERSION)
 # know exactly what you're doing and have read and understand
 # http://www.gnu.org/software/libtool/manual/html_node/Updating-version-info.html
 #
-# libfty_log -version-info
+# libfty_common_logging -version-info
 LTVER="1:0:0"
 AC_SUBST(LTVER)
 
@@ -49,7 +49,7 @@ AC_SUBST(LTVER)
 AM_CONDITIONAL([USING_VPATH], [test "x${srcdir}" != "x."])
 
 # Capture c flags
-FTY_LOG_ORIG_CFLAGS="${CFLAGS:-none}"
+FTY_COMMON_LOGGING_ORIG_CFLAGS="${CFLAGS:-none}"
 
 # Checks for programs
 AC_PROG_CC
@@ -75,13 +75,13 @@ AM_CONDITIONAL(WITH_CPPCHECK, $WITH_CPPCHECK)
 AC_MSG_CHECKING([whether to enable GCov])
 AC_ARG_WITH(gcov, [AS_HELP_STRING([--with-gcov=yes/no],
                   [With GCC Code Coverage reporting])],
-                  [FTY_LOG_GCOV="$withval"])
+                  [FTY_COMMON_LOGGING_GCOV="$withval"])
 
-if test "x${FTY_LOG_GCOV}" == "xyes"; then
+if test "x${FTY_COMMON_LOGGING_GCOV}" == "xyes"; then
     CFLAGS="-O0 -g -fprofile-arcs -ftest-coverage"
 
-    if test "x${FTY_LOG_ORIG_CFLAGS}" != "xnone"; then
-        CFLAGS="${CFLAGS} ${FTY_LOG_ORIG_CFLAGS}"
+    if test "x${FTY_COMMON_LOGGING_ORIG_CFLAGS}" != "xnone"; then
+        CFLAGS="${CFLAGS} ${FTY_COMMON_LOGGING_ORIG_CFLAGS}"
     fi
     AM_CONDITIONAL(WITH_GCOV, true)
     AC_MSG_RESULT([yes])
@@ -94,9 +94,9 @@ fi
 AC_MSG_CHECKING([whether to enable ASan])
 AC_ARG_ENABLE(address-sanitizer, [AS_HELP_STRING([--enable-address-sanitizer=yes/no],
                   [Build with GCC Address Sanitizer instrumentation])],
-                  [FTY_LOG_ASAN="$enableval"])
+                  [FTY_COMMON_LOGGING_ASAN="$enableval"])
 
-if test "x${FTY_LOG_ASAN}" == "xyes"; then
+if test "x${FTY_COMMON_LOGGING_ASAN}" == "xyes"; then
     CFLAGS="${CFLAGS} -fsanitize=address"
     CXXFLAGS="${CXXFLAGS} -fsanitize=address"
 
@@ -165,7 +165,7 @@ AS_CASE([x"${with_cxxtools}"],
 dnl We do not abort right now, because the maintainer/developer may have
 dnl something particular in mind, e.g. to build just parts of a project.
 AS_IF([test x"${search_cxxtools}" = xno],
-    [AC_MSG_WARN([Required dependency on cxxtools was explicitly disabled during configuration by '--with-cxxtools=no'; subsequent full build of fty-log may fail])])
+    [AC_MSG_WARN([Required dependency on cxxtools was explicitly disabled during configuration by '--with-cxxtools=no'; subsequent full build of fty-common-logging may fail])])
 
 AS_IF([test x"${search_cxxtools}" = xyes], [
     # Archive previously detected and supplied flags
@@ -254,7 +254,7 @@ AS_CASE([x"${with_log4cplus}"],
 dnl We do not abort right now, because the maintainer/developer may have
 dnl something particular in mind, e.g. to build just parts of a project.
 AS_IF([test x"${search_log4cplus}" = xno],
-    [AC_MSG_WARN([Required dependency on log4cplus was explicitly disabled during configuration by '--with-log4cplus=no'; subsequent full build of fty-log may fail])])
+    [AC_MSG_WARN([Required dependency on log4cplus was explicitly disabled during configuration by '--with-log4cplus=no'; subsequent full build of fty-common-logging may fail])])
 
 AS_IF([test x"${search_log4cplus}" = xyes], [
     # Archive previously detected and supplied flags
@@ -327,11 +327,11 @@ LIBS="${PREVIOUS_LIBS}"
 AC_SUBST(pkg_config_libs_private, $PKGCFG_LIBS_PRIVATE)
 
 # Platform specific checks
-fty_log_on_mingw32="no"
-fty_log_on_cygwin="no"
-fty_log_on_android="no"
-fty_log_on_linux="no"
-fty_log_on_gnu="no"
+fty_common_logging_on_mingw32="no"
+fty_common_logging_on_cygwin="no"
+fty_common_logging_on_android="no"
+fty_common_logging_on_linux="no"
+fty_common_logging_on_gnu="no"
 
 # Host specific checks
 AC_CANONICAL_HOST
@@ -344,49 +344,49 @@ AC_ARG_WITH([docs],
     [with_docs=$withval])
 
 if test "x$with_docs" = "xno"; then
-    fty_log_build_doc="no"
-    fty_log_install_man="no"
+    fty_common_logging_build_doc="no"
+    fty_common_logging_install_man="no"
 else
     # Determine whether or not documentation should be built and installed.
-    fty_log_build_doc="yes"
-    fty_log_install_man="yes"
+    fty_common_logging_build_doc="yes"
+    fty_common_logging_install_man="yes"
 
     # Check for asciidoc and xmlto and don't build the docs if these are not installed.
-    AC_CHECK_PROG(fty_log_have_asciidoc, asciidoc, yes, no)
-    AC_CHECK_PROG(fty_log_have_xmlto, xmlto, yes, no)
-    if test "x$fty_log_have_asciidoc" = "xno" -o "x$fty_log_have_xmlto" = "xno"; then
+    AC_CHECK_PROG(fty_common_logging_have_asciidoc, asciidoc, yes, no)
+    AC_CHECK_PROG(fty_common_logging_have_xmlto, xmlto, yes, no)
+    if test "x$fty_common_logging_have_asciidoc" = "xno" -o "x$fty_common_logging_have_xmlto" = "xno"; then
         if test "x$with_docs" = "xyes" ; then
             AC_MSG_ERROR([Build with docs was explicitly requested, but tools are not available])
         fi
-        fty_log_build_doc="no"
+        fty_common_logging_build_doc="no"
         # Tarballs built with 'make dist' ship with prebuilt documentation.
-        if ! test -f doc/fty-log.7; then
-            fty_log_install_man="no"
-            AC_MSG_WARN([You are building an unreleased version of FTY-LOG and asciidoc or xmlto are not installed.])
+        if ! test -f doc/fty-common-logging.7; then
+            fty_common_logging_install_man="no"
+            AC_MSG_WARN([You are building an unreleased version of FTY-COMMON-LOGGING and asciidoc or xmlto are not installed.])
             AC_MSG_WARN([Documentation will not be built and manual pages will not be installed.])
         fi
     fi
 fi
 AC_MSG_CHECKING([whether to build documentation])
-AC_MSG_RESULT([$fty_log_build_doc])
+AC_MSG_RESULT([$fty_common_logging_build_doc])
 AC_MSG_CHECKING([whether to install manpages])
-AC_MSG_RESULT([$fty_log_install_man])
+AC_MSG_RESULT([$fty_common_logging_install_man])
 
-# Set some default features required by libfty_log code.
-CPPFLAGS="-DFTY_LOG_INTERNAL_BUILD -D_REENTRANT -D_THREAD_SAFE $CPPFLAGS"
+# Set some default features required by libfty_common_logging code.
+CPPFLAGS="-DFTY_COMMON_LOGGING_INTERNAL_BUILD -D_REENTRANT -D_THREAD_SAFE $CPPFLAGS"
 
 # OS-specific tests
 case "${host_os}" in
     *linux*)
         # Define on Linux to enable all library features
         CPPFLAGS="-D_GNU_SOURCE -DLINUX $CPPFLAGS"
-        AC_DEFINE(FTY_LOG_HAVE_LINUX, 1, [Have Linux OS])
-        fty_log_on_linux="yes"
+        AC_DEFINE(FTY_COMMON_LOGGING_HAVE_LINUX, 1, [Have Linux OS])
+        fty_common_logging_on_linux="yes"
 
         case "${host_os}" in
             *android*)
-                AC_DEFINE(FTY_LOG_HAVE_ANDROID, 1, [Have Android OS])
-                fty_log_on_android="yes"
+                AC_DEFINE(FTY_COMMON_LOGGING_HAVE_ANDROID, 1, [Have Android OS])
+                fty_common_logging_on_android="yes"
             ;;
         esac
         ;;
@@ -395,74 +395,74 @@ case "${host_os}" in
         CPPFLAGS="-D_PTHREADS $CPPFLAGS"
         # Allow definitions of common OS-provided functions that are not in old standards
         CPPFLAGS="-D__EXTENSIONS__ $CPPFLAGS"
-        AC_DEFINE(FTY_LOG_HAVE_SOLARIS, 1, [Have Solaris OS])
+        AC_DEFINE(FTY_COMMON_LOGGING_HAVE_SOLARIS, 1, [Have Solaris OS])
         CFLAGS="${CFLAGS} -lsocket -lssp"
         ;;
     *freebsd*)
         # Define on FreeBSD to enable all library features
         CPPFLAGS="-D__BSD_VISIBLE $CPPFLAGS"
-        AC_DEFINE(FTY_LOG_HAVE_FREEBSD, 1, [Have FreeBSD OS])
+        AC_DEFINE(FTY_COMMON_LOGGING_HAVE_FREEBSD, 1, [Have FreeBSD OS])
         ;;
     *darwin*)
         # Define on Darwin to enable all library features
         CPPFLAGS="-D_DARWIN_C_SOURCE $CPPFLAGS"
-        AC_DEFINE(FTY_LOG_HAVE_OSX, 1, [Have DarwinOSX OS])
+        AC_DEFINE(FTY_COMMON_LOGGING_HAVE_OSX, 1, [Have DarwinOSX OS])
         ;;
     *netbsd*)
         # Define on NetBSD to enable all library features
         CPPFLAGS="-D_NETBSD_SOURCE $CPPFLAGS"
-        AC_DEFINE(FTY_LOG_HAVE_NETBSD, 1, [Have NetBSD OS])
+        AC_DEFINE(FTY_COMMON_LOGGING_HAVE_NETBSD, 1, [Have NetBSD OS])
         ;;
     *openbsd*)
         # Define on OpenBSD to enable all library features
         CPPFLAGS="-D_BSD_SOURCE $CPPFLAGS"
-        AC_DEFINE(FTY_LOG_HAVE_OPENBSD, 1, [Have OpenBSD OS])
+        AC_DEFINE(FTY_COMMON_LOGGING_HAVE_OPENBSD, 1, [Have OpenBSD OS])
         ;;
     *nto-qnx*)
-        AC_DEFINE(FTY_LOG_HAVE_QNXNTO, 1, [Have QNX Neutrino OS])
+        AC_DEFINE(FTY_COMMON_LOGGING_HAVE_QNXNTO, 1, [Have QNX Neutrino OS])
         ;;
     *aix*)
-        AC_DEFINE(FTY_LOG_HAVE_AIX, 1, [Have AIX OS])
+        AC_DEFINE(FTY_COMMON_LOGGING_HAVE_AIX, 1, [Have AIX OS])
         ;;
     *hpux*)
         # Define on HP-UX to enable all library features
         CPPFLAGS="-D_POSIX_C_SOURCE=200112L"
-        AC_DEFINE(FTY_LOG_HAVE_HPUX, 1, [Have HPUX OS])
+        AC_DEFINE(FTY_COMMON_LOGGING_HAVE_HPUX, 1, [Have HPUX OS])
         ;;
     *mingw32*)
         # Disable format error due to incomplete ANSI C
         CFLAGS="-Wno-error=format -Wno-unused-function -Wno-unused-variable -D_XOPEN_SOURCE $CFLAGS"
         CPPFLAGS="-Wno-error=format -Wno-unused-function -Wno-unused-variable -D_XOPEN_SOURCE $CPPFLAGS"
-        AC_DEFINE(FTY_LOG_HAVE_WINDOWS, 1, [Have Windows OS])
-        AC_DEFINE(FTY_LOG_HAVE_MINGW32, 1, [Have MinGW32])
+        AC_DEFINE(FTY_COMMON_LOGGING_HAVE_WINDOWS, 1, [Have Windows OS])
+        AC_DEFINE(FTY_COMMON_LOGGING_HAVE_MINGW32, 1, [Have MinGW32])
         AC_CHECK_HEADERS(windows.h)
-        fty_log_on_mingw32="yes"
-        fty_log_install_man="no"
+        fty_common_logging_on_mingw32="yes"
+        fty_common_logging_install_man="no"
         ;;
     *mingw64*)
         # Define on MINGW64 to enable all libeary features
         # Disable format error due to incomplete ANSI C
         CFLAGS="-Wno-error=format -Wno-unused-function -Wno-unused-variable -D_XOPEN_SOURCE $CFLAGS"
         CPPFLAGS="-Wno-error=format -Wno-unused-function -Wno-unused-variable -D_XOPEN_SOURCE $CPPFLAGS"
-        AC_DEFINE(FTY_LOG_HAVE_WINDOWS, 1, [Have Windows OS])
-        AC_DEFINE(FTY_LOG_HAVE_MINGW32, 1, [Have MinGW32])
+        AC_DEFINE(FTY_COMMON_LOGGING_HAVE_WINDOWS, 1, [Have Windows OS])
+        AC_DEFINE(FTY_COMMON_LOGGING_HAVE_MINGW32, 1, [Have MinGW32])
         AC_CHECK_HEADERS(windows.h)
-        fty_log_on_mingw32="yes"
-        fty_log_install_man="no"
+        fty_common_logging_on_mingw32="yes"
+        fty_common_logging_install_man="no"
         ;;
     *cygwin*)
         # Define on Cygwin to enable all library features
         CPPFLAGS="-D_GNU_SOURCE $CPPFLAGS"
-        AC_DEFINE(FTY_LOG_HAVE_CYGWIN, 1, [Have Cygwin])
-        fty_log_on_cygwin="yes"
+        AC_DEFINE(FTY_COMMON_LOGGING_HAVE_CYGWIN, 1, [Have Cygwin])
+        fty_common_logging_on_cygwin="yes"
         ;;
     gnu*)
         # Define on GNU/Hurd to enable all library features
         if test "x$GXX" = "xyes"; then
             CPPFLAGS="-D_GNU_SOURCE $CPPFLAGS"
         fi
-        AC_DEFINE(FTY_LOG_HAVE_GNU, 1, [Have GNU/Hurd OS])
-        fty_log_on_gnu="yes"
+        AC_DEFINE(FTY_COMMON_LOGGING_HAVE_GNU, 1, [Have GNU/Hurd OS])
+        fty_common_logging_on_gnu="yes"
         ;;
     *)
         AC_MSG_ERROR([unsupported system: ${host_os}])
@@ -494,13 +494,13 @@ AC_C_VOLATILE
 AC_C_BIGENDIAN
 
 AM_CONDITIONAL(ENABLE_SHARED, test "x$enable_shared" = "xyes")
-AM_CONDITIONAL(ON_MINGW, test "x$fty_log_on_mingw32" = "xyes")
-AM_CONDITIONAL(ON_CYGWIN, test "x$fty_log_on_cygwin" = "xyes")
-AM_CONDITIONAL(ON_ANDROID, test "x$fty_log_on_android" = "xyes")
-AM_CONDITIONAL(ON_LINUX, test "x$fty_log_on_linux" = "xyes")
-AM_CONDITIONAL(ON_GNU, test "x$fty_log_on_gnu" = "xyes")
-AM_CONDITIONAL(INSTALL_MAN, test "x$fty_log_install_man" = "xyes")
-AM_CONDITIONAL(BUILD_DOC, test "x$fty_log_build_doc" = "xyes")
+AM_CONDITIONAL(ON_MINGW, test "x$fty_common_logging_on_mingw32" = "xyes")
+AM_CONDITIONAL(ON_CYGWIN, test "x$fty_common_logging_on_cygwin" = "xyes")
+AM_CONDITIONAL(ON_ANDROID, test "x$fty_common_logging_on_android" = "xyes")
+AM_CONDITIONAL(ON_LINUX, test "x$fty_common_logging_on_linux" = "xyes")
+AM_CONDITIONAL(ON_GNU, test "x$fty_common_logging_on_gnu" = "xyes")
+AM_CONDITIONAL(INSTALL_MAN, test "x$fty_common_logging_install_man" = "xyes")
+AM_CONDITIONAL(BUILD_DOC, test "x$fty_common_logging_build_doc" = "xyes")
 
 AC_ARG_ENABLE([dist_cmakefiles],
     AS_HELP_STRING([--enable-dist_cmakefiles],
@@ -515,15 +515,15 @@ fi
      AC_MSG_RESULT([$enable_dist_cmakefiles])])
 AM_CONDITIONAL(ENABLE_DIST_CMAKEFILES, test "x$enable_dist_cmakefiles" = "xyes")
 
-# Check for fty_log_selftest intent
-AC_ARG_ENABLE([fty_log_selftest],
-    AS_HELP_STRING([--enable-fty_log_selftest],
-        [Compile 'fty_log_selftest' in src [default=yes]]),
-    [enable_fty_log_selftest=$enableval],
-    [enable_fty_log_selftest=yes])
+# Check for fty_common_logging_selftest intent
+AC_ARG_ENABLE([fty_common_logging_selftest],
+    AS_HELP_STRING([--enable-fty_common_logging_selftest],
+        [Compile 'fty_common_logging_selftest' in src [default=yes]]),
+    [enable_fty_common_logging_selftest=$enableval],
+    [enable_fty_common_logging_selftest=yes])
 
-AM_CONDITIONAL([ENABLE_FTY_LOG_SELFTEST], [test x$enable_fty_log_selftest != xno])
-AM_COND_IF([ENABLE_FTY_LOG_SELFTEST], [AC_MSG_NOTICE([ENABLE_FTY_LOG_SELFTEST defined])])
+AM_CONDITIONAL([ENABLE_FTY_COMMON_LOGGING_SELFTEST], [test x$enable_fty_common_logging_selftest != xno])
+AM_COND_IF([ENABLE_FTY_COMMON_LOGGING_SELFTEST], [AC_MSG_NOTICE([ENABLE_FTY_COMMON_LOGGING_SELFTEST defined])])
 
 # Checks for library functions.
 AC_TYPE_SIGNAL
@@ -537,8 +537,8 @@ AM_CONDITIONAL([ENABLE_DRAFTS], [test x$enable_drafts != xno])
 
 if test "x$enable_drafts" = "xyes"; then
     AC_MSG_NOTICE([Building stable and legacy API + draft API])
-    AC_DEFINE(FTY_LOG_BUILD_DRAFT_API, 1, [Provide draft classes and methods])
-    AC_SUBST(pkg_config_defines, "-DFTY_LOG_BUILD_DRAFT_API=1")
+    AC_DEFINE(FTY_COMMON_LOGGING_BUILD_DRAFT_API, 1, [Provide draft classes and methods])
+    AC_SUBST(pkg_config_defines, "-DFTY_COMMON_LOGGING_BUILD_DRAFT_API=1")
 else
     AC_MSG_NOTICE([Building stable and legacy API (no draft API)])
     AC_SUBST(pkg_config_defines, "")
@@ -577,7 +577,7 @@ AS_IF([test "x$enable_Werror" = "xyes" || test "x$enable_Werror" = "xauto"],
 AC_CONFIG_FILES([Makefile
                  doc/Makefile
                  include/Makefile
-                 src/libfty_log.pc
+                 src/libfty_common_logging.pc
                  ])
 
 
@@ -618,12 +618,12 @@ echo C++ compiler.................. : $CXX
 echo C++ compiler flags............ : $CXXFLAGS
 echo Configure date................ : $BUILD_DATE
 echo Build architecture............ : $BUILD_ARCH
-echo Build docs.................... : $fty_log_build_doc
+echo Build docs.................... : $fty_common_logging_build_doc
 echo Build host.................... : $BUILD_HOST
 echo Build user.................... : $USER
 echo Draft API..................... : $enable_drafts
 echo Install dir................... : $prefix
-echo Install man pages............. : $fty_log_install_man
+echo Install man pages............. : $fty_common_logging_install_man
 
 echo
 echo Help:

@@ -1,8 +1,8 @@
 Format: 3.0 (quilt)
-Binary: fty-log
-Source: fty-log
+Binary: fty-common-logging
+Source: fty-common-logging
 Version: 1.0.0
-Maintainer: fty-log Developers <eatonipcopensource@eaton.com>
+Maintainer: fty-common-logging Developers <eatonipcopensource@eaton.com>
 Architecture: any
 Build-Depends: debhelper (>= 9),
     pkg-config,
@@ -12,4 +12,4 @@ Build-Depends: debhelper (>= 9),
     dh-autoreconf
 
 Files:
- 7697688bf65a35bc33ae2db51ebb0e3b 818110 fty-log.tar.gz
+ 7697688bf65a35bc33ae2db51ebb0e3b 818110 fty-common-logging.tar.gz
