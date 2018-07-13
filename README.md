@@ -251,12 +251,6 @@ In the main `.h` file add
 #include <fty-log/fty_logger.h>
 ```
 
-### Macro
-
-The following macros are defined :
- * `#define STR(X) #X`
- * `#define streq(s1,s2) (!strcmp ((s1), (s2)))` (if not already defined)
-
 ## How to compile and test using 42ITy standards
 
 ### project.xml

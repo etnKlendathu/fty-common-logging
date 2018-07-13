@@ -24,12 +24,6 @@
 
 #include <string.h>
 
-#define STR(X) #X
-
-#ifndef srteq
-#define streq(s1,s2) (!strcmp ((s1), (s2)))
-#endif
-
 #ifdef __cplusplus
 #include <cxxtools/log.h>
 #endif
