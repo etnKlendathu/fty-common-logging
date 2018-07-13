@@ -119,15 +119,9 @@ void Ftylog::change(std::string name,std::string configFile)
 //Initialize from environment variables
 void Ftylog::setLogLevelFromEnv()
 {
-  //By default, set TRACE level
-  setLogLevelTrace();
-
   //get BIOS_LOG_LEVEL value and set correction logging level
   const char *varEnv = getenv("BIOS_LOG_LEVEL");
-  if (varEnv && !std::string(varEnv).empty())
-  {
-    setLogLevelFromEnv(varEnv);
-  }
+  setLogLevelFromEnv(varEnv ? varEnv : "");
 }
 void Ftylog::setPatternFromEnv()
 {
@@ -264,32 +258,30 @@ void Ftylog::loadAppenders()
 }
 
 //Set the logging level corresponding to the BIOS_LOG_LEVEL value
-void Ftylog::setLogLevelFromEnv(const char* level)
+void Ftylog::setLogLevelFromEnv(const std::string& level)
 {
   //If empty string, set log level to TRACE
-  if (std::string(level).empty())
+  if (level.empty())
   {
     setLogLevelTrace();
-    return;
   }
-
-  if (streq(level, "LOG_DEBUG") )
+  else if (level == "LOG_DEBUG")
   {
     setLogLevelDebug();
   }
-  else if (streq(level, "LOG_INFO"))
+  else if (level == "LOG_INFO")
   {
     setLogLevelInfo();
   }
-  else if (streq(level, "LOG_WARNING"))
+  else if (level == "LOG_WARNING")
   {
     setLogLevelWarning();
   }
-  else if (streq(level, "LOG_ERR"))
+  else if (level == "LOG_ERR")
   {
     setLogLevelError();
   }
-  else if (streq(level, "LOG_CRIT"))
+  else if (level == "LOG_CRIT")
   {
     setLogLevelFatal();
   }
