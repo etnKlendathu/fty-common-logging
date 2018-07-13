@@ -24,12 +24,6 @@
 
 #include <string.h>
 
-#define STR(X) #X
-
-#ifndef srteq
-#define streq(s1,s2) (!strcmp ((s1), (s2)))
-#endif
-
 #ifdef __cplusplus
 #include <cxxtools/log.h>
 #endif
@@ -158,7 +152,7 @@ private:
 
   //Set log level with level from syslog.h for debug, info, warning, error and fatal
   // log level set to trace level otherwise
-  void setLogLevelFromEnv(const char* level);
+  void setLogLevelFromEnv(const std::string& level);
 
   //Set needed variables from env
   void setLogLevelFromEnv();
