@@ -160,7 +160,7 @@ void Ftylog::setVeboseMode()
   {
     log4cplus::Appender & app = *appenderPtr;
 
-    if (streq(typeid (app).name(), typeid (log4cplus::ConsoleAppender).name()))
+    if (typeid (app) == typeid (log4cplus::ConsoleAppender))
     {
       //If any, remove it
       _logger.removeAppender(appenderPtr);
