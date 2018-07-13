@@ -30,9 +30,6 @@
 #define streq(s1,s2) (!strcmp ((s1), (s2)))
 #endif
 
-//  Include the project library file
-#include "fty_common_logging_library.h"
-
 #ifdef __cplusplus
 #include <cxxtools/log.h>
 #endif
