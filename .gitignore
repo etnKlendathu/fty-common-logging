@@ -81,7 +81,6 @@ CMake*
 *.cmake
 
 # Repositories downloaded by CI integration scripts
-cxxtools/
 log4cplus/
 
 # Travis build area

@@ -9,12 +9,11 @@ AM_CXXFLAGS = \
     -std=c++11
 
 AM_CPPFLAGS = \
-    ${cxxtools_CFLAGS} \
     ${log4cplus_CFLAGS} \
     -D__STDC_FORMAT_MACROS \
     -I$(srcdir)/include
 
-project_libs = ${cxxtools_LIBS} ${log4cplus_LIBS}
+project_libs = ${log4cplus_LIBS}
 
 SUBDIRS = doc
 SUBDIRS += include
@@ -35,7 +34,6 @@ DISTCLEANFILES =
 
 if ENABLE_DIST_CMAKEFILES
 EXTRA_DIST += \
-    Findcxxtools.cmake \
     Findlog4cplus.cmake \
     builds/cmake/Modules/ClangFormat.cmake \
     builds/cmake/clang-format-check.sh.in \
