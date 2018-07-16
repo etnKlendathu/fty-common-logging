@@ -24,9 +24,6 @@
 
 #include <string.h>
 
-#ifdef __cplusplus
-#include <cxxtools/log.h>
-#endif
 // Trick to avoid conflict with CXXTOOLS logger, currently the BIOS code
 // prefers OUR logger macros
 #if defined(LOG_CXXTOOLS_H) || defined(CXXTOOLS_LOG_CXXTOOLS_H)

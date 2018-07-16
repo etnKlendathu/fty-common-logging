@@ -47,7 +47,6 @@ BuildRequires:  libtool
 BuildRequires:  pkgconfig
 BuildRequires:  xmlto
 BuildRequires:  gcc-c++
-BuildRequires:  cxxtools-devel
 BuildRequires:  log4cplus-devel
 BuildRoot:      %{_tmppath}/%{name}-%{version}-build
 
@@ -72,7 +71,6 @@ This package contains shared library for fty-common-logging: provides common log
 Summary:        provides common logs
 Group:          System/Libraries
 Requires:       libfty_common_logging1 = %{version}
-Requires:       cxxtools-devel
 Requires:       log4cplus-devel
 
 %description devel
