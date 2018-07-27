@@ -147,6 +147,9 @@ private:
   //Set the console appender
   void setConsoleAppender();
 
+  // Remove instances of log4cplus::ConsoleAppender from a given logger
+  static void removeConsoleAppenders(log4cplus::Logger logger);
+
   //Set log level with level from syslog.h for debug, info, warning, error and fatal
   // log level set to trace level otherwise
   void setLogLevelFromEnv(const std::string& level);

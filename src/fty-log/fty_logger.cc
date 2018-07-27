@@ -148,6 +148,21 @@ void Ftylog::setConsoleAppender()
   _logger.addAppender(append);
 }
 
+void Ftylog::removeConsoleAppenders(log4cplus::Logger logger)
+{
+  for (log4cplus::SharedAppenderPtr & appenderPtr : logger.getAllAppenders())
+  {
+    log4cplus::Appender & app = *appenderPtr;
+
+    if (typeid (app) == typeid (log4cplus::ConsoleAppender))
+    {
+      //If any, remove it
+      logger.removeAppender(appenderPtr);
+      break;
+    }
+  }
+}
+
 //Switch the logging system to verbose
 void Ftylog::setVeboseMode()
 {
@@ -155,18 +170,11 @@ void Ftylog::setVeboseMode()
   log4cplus::LogLevel oldLevel = _logger.getLogLevel();
   //set log level of the logger to TRACE
   setLogLevelTrace();
-  //Search if a console appender already exist
-  for (log4cplus::SharedAppenderPtr & appenderPtr : _logger.getAllAppenders())
-  {
-    log4cplus::Appender & app = *appenderPtr;
-
-    if (typeid (app) == typeid (log4cplus::ConsoleAppender))
-    {
-      //If any, remove it
-      _logger.removeAppender(appenderPtr);
-      break;
-    }
-  }
+  //Search if a console appender already exist in our logger instance or in
+  //the root logger (we assume a flat hierarchy with the root logger and
+  //specialized instances directly below the root logger)
+  removeConsoleAppenders(_logger);
+  removeConsoleAppenders(log4cplus::getDefaultHierarchy().getRoot());
 
   //Set all remaining appenders with the old log level as threshold if not defined
   for (log4cplus::SharedAppenderPtr & appenderPtr : _logger.getAllAppenders())
