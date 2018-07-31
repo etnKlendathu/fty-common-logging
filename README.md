@@ -28,7 +28,8 @@ is set (and not empty), it also overrides the default level set in the
 confguration file, if present.
 
 This system sets 6 levels for logs with in order of importance (lowest
-to highest) :
+to highest), and a way to switch off logging of messages completely when
+needed:
 
 * `TRACE` Designates finer-grained informational events than the DEBUG.
 * `DEBUG` Designates fine-grained informational events that are most useful to debug an application.
@@ -36,6 +37,7 @@ to highest) :
 * `WARN`  Designates potentially harmful situations.
 * `ERROR` Designates error events that might still allow the application to continue running.
 * `FATAL` Designates very severe error events that will presumably lead the application to abort.
+* `OFF`   Designates a special case of turning off the logging.
 
 with the following matching between the values of `BIOS_LOG_LEVEL`, if set,
 and the log4cplus level set by default then:
@@ -47,7 +49,19 @@ and the log4cplus level set by default then:
 | LOG_WARNING         |     WARN         |
 | LOG_INFO            |     INFO         |
 | LOG_DEBUG           |     DEBUG        |
+| LOG_OFF             |     OFF          |
 | Other               |     TRACE        |
+
+Caller can also define a `BIOS_LOG_INIT_LEVEL` environment variable to set
+the log level for duration of initializing the logging subsystem itself or
+of loading a new configuration file. This allows to e.g. disable the messages
+about initializing log4cplus, and which configuration files it tried to use,
+and whether it succeeded to find them, but for execution of the application
+program it would use the level defined by either `BIOS_LOG_LEVEL`, or the
+loaded configuration, or the fallback default level.
+
+If no configuration is present and a `BIOS_LOG_LEVEL` is also not provided,
+the fallback default logging level is TRACE.
 
 ### Notes for agents coded in C++
 
