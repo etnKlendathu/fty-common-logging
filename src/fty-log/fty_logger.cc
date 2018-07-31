@@ -293,6 +293,10 @@ void Ftylog::setLogLevelFromEnv(const std::string& level)
   {
     setLogLevelFatal();
   }
+  else if (level == "LOG_OFF")
+  {
+    setLogLevelOff();
+  }
   else
   {
     //Set trace level by default
@@ -331,6 +335,11 @@ void Ftylog::setLogLevelFatal()
   _logger.setLogLevel(log4cplus::FATAL_LOG_LEVEL);
 }
 
+void Ftylog::setLogLevelOff()
+{
+  _logger.setLogLevel(log4cplus::OFF_LOG_LEVEL);
+}
+
 //Return true if the logging level is include in the logger log level
 bool Ftylog::isLogLevel(log4cplus::LogLevel level)
 {
@@ -365,6 +374,11 @@ bool Ftylog::isLogError()
 bool Ftylog::isLogFatal()
 {
   return this->isLogLevel(log4cplus::FATAL_LOG_LEVEL);
+}
+
+bool Ftylog::isLogOff()
+{
+  return _logger.getLogLevel() == log4cplus::OFF_LOG_LEVEL;
 }
 
 //Call log4cplus system to print logs in logger appenders

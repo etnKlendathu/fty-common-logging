@@ -186,6 +186,7 @@ public:
   void setLogLevelWarning();
   void setLogLevelError();
   void setLogLevelFatal();
+  void setLogLevelOff();
 
   //Check the log level
   bool isLogTrace();
@@ -194,6 +195,7 @@ public:
   bool isLogWarning();
   bool isLogError();
   bool isLogFatal();
+  bool isLogOff();
 
   /*! \brief insertLog
     An internal logging function, use specific log_error, log_debug  macros!
