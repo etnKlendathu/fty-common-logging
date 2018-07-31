@@ -150,7 +150,16 @@ private:
   // Remove instances of log4cplus::ConsoleAppender from a given logger
   static void removeConsoleAppenders(log4cplus::Logger logger);
 
-  //Set log level with level from syslog.h for debug, info, warning, error and fatal
+  //Set log level with level from syslog.h
+  //for debug, info, warning, error, fatal or off
+  bool setLogLevelFromEnvDefinite(const std::string& level);
+
+  //Set logging subsystem initialization messages' log level with a valid
+  //string; log level set to OFF level otherwise
+  //used only in loadAppenders() to control its spamminess
+  void setLogInitLevelFromEnv(const std::string& level);
+
+  //Set default log level from envvar with a valid string;
   // log level set to trace level otherwise
   void setLogLevelFromEnv(const std::string& level);
 

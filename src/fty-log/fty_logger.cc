@@ -58,6 +58,19 @@ Ftylog::Ftylog()
 
 void Ftylog::init(std::string component, std::string configFile)
 {
+  //Get BIOS_LOG_INIT_LEVEL value and set correction logging level
+  //before we start processing the rest - perhaps the user does not
+  //want to see reports about early logging initialization itself.
+  //When we do have some configuration loaded or defaulted, it will
+  //override this setting. Note that loadAppenders() would process
+  //this envvar again - this is because the de-initialization below
+  //can make some noise, and/or config can be reloaded at run-time.
+  const char *varEnvInit = getenv("BIOS_LOG_INIT_LEVEL");
+  if (NULL != varEnvInit)
+  {
+    setLogInitLevelFromEnv(varEnvInit);
+  }
+
   if (NULL != _watchConfigFile)
   {
     delete _watchConfigFile;
@@ -213,6 +226,26 @@ void Ftylog::clearContext()
 // or set a basic ConsoleAppender
 void Ftylog::loadAppenders()
 {
+  //If the caller provided a BIOS_LOG_INIT_LEVEL setting,
+  //honor it until we load a config file or have none -
+  //and at that point revert to current logging level first.
+  //This should allow for quiet tool startups when explicitly
+  //desired.
+  const char *varEnvInit = getenv("BIOS_LOG_INIT_LEVEL");
+  log4cplus::LogLevel oldLevel = log4cplus::NOT_SET_LOG_LEVEL;
+  if (NULL != varEnvInit)
+  {
+    //Save the loglevel of the logger - e.g. a value set
+    //by common BIOS_LOG_LEVEL earlier
+    oldLevel = _logger.getLogLevel();
+    setLogInitLevelFromEnv(varEnvInit);
+  }
+
+  if (log4cplus::NOT_SET_LOG_LEVEL != oldLevel)
+  {
+    _logger.setLogLevel(oldLevel);
+  }
+
   //by default, load console appenders
   setConsoleAppender();
 
@@ -254,6 +287,11 @@ void Ftylog::loadAppenders()
     //Remove previous appender
     _logger.removeAllAppenders();
 
+    if (log4cplus::NOT_SET_LOG_LEVEL != oldLevel)
+    {
+      _logger.setLogLevel(oldLevel);
+    }
+
     //Load the file
     log4cplus::PropertyConfigurator::doConfigure(LOG4CPLUS_TEXT(_configFile));
     //Start the thread watching the modification of the log config file
@@ -262,16 +300,20 @@ void Ftylog::loadAppenders()
   else
   {
     log_info_log(this,"No log configuration file was loaded, will log to stderr by default");
+    if (log4cplus::NOT_SET_LOG_LEVEL != oldLevel)
+    {
+      _logger.setLogLevel(oldLevel);
+    }
   }
 }
 
 //Set the logging level corresponding to the BIOS_LOG_LEVEL value
-void Ftylog::setLogLevelFromEnv(const std::string& level)
+bool Ftylog::setLogLevelFromEnvDefinite(const std::string& level)
 {
-  //If empty string, set log level to TRACE
   if (level.empty())
   {
-    setLogLevelTrace();
+    //If empty string, set nothing and return false
+    return false;
   }
   else if (level == "LOG_DEBUG")
   {
@@ -299,7 +341,26 @@ void Ftylog::setLogLevelFromEnv(const std::string& level)
   }
   else
   {
-    //Set trace level by default
+    //If unknown string, set nothing and return false
+    return false;
+  }
+  return true;
+}
+
+void Ftylog::setLogInitLevelFromEnv(const std::string& level)
+{
+  //If empty or unknown string, set logging subsystem initialization level to OFF
+  if (!setLogLevelFromEnvDefinite(level))
+  {
+    setLogLevelOff();
+  }
+}
+
+void Ftylog::setLogLevelFromEnv(const std::string& level)
+{
+  //If empty or unknown string, set log level to TRACE by default
+  if (!setLogLevelFromEnvDefinite(level))
+  {
     setLogLevelTrace();
   }
 }
