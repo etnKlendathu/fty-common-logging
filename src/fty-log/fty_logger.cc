@@ -58,19 +58,6 @@ Ftylog::Ftylog()
 
 void Ftylog::init(std::string component, std::string configFile)
 {
-  //Get BIOS_LOG_INIT_LEVEL value and set correction logging level
-  //before we start processing the rest - perhaps the user does not
-  //want to see reports about early logging initialization itself.
-  //When we do have some configuration loaded or defaulted, it will
-  //override this setting. Note that loadAppenders() would process
-  //this envvar again - this is because the de-initialization below
-  //can make some noise, and/or config can be reloaded at run-time.
-  const char *varEnvInit = getenv("BIOS_LOG_INIT_LEVEL");
-  if (NULL != varEnvInit)
-  {
-    setLogInitLevelFromEnv(varEnvInit);
-  }
-
   if (NULL != _watchConfigFile)
   {
     delete _watchConfigFile;
@@ -226,15 +213,24 @@ void Ftylog::clearContext()
 // or set a basic ConsoleAppender
 void Ftylog::loadAppenders()
 {
-  //If the caller provided a BIOS_LOG_INIT_LEVEL setting,
-  //honor it until we load a config file or have none -
-  //and at that point revert to current logging level first.
-  //This should allow for quiet tool startups when explicitly
-  //desired.
+  //Get BIOS_LOG_INIT_LEVEL value and set correction logging level
+  //before we start processing the rest - perhaps the user does not
+  //want to see reports about early logging initialization itself.
+  //When we do have some configuration loaded or defaulted, it will
+  //later override this setting.
+  //Note that each call to loadAppenders() would process this envvar
+  //again - this is because the de-initialization below can make
+  //some noise, and/or config can be reloaded at run-time.
   const char *varEnvInit = getenv("BIOS_LOG_INIT_LEVEL");
   log4cplus::LogLevel oldLevel = log4cplus::NOT_SET_LOG_LEVEL;
   if (NULL != varEnvInit)
   {
+    //If the caller provided a BIOS_LOG_INIT_LEVEL setting,
+    //honor it until we load a config file or have none -
+    //and at that point revert to current logging level first.
+    //This should allow for quiet tool startups when explicitly
+    //desired.
+
     //Save the loglevel of the logger - e.g. a value set
     //by common BIOS_LOG_LEVEL earlier
     oldLevel = _logger.getLogLevel();
