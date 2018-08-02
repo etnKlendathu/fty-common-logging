@@ -237,11 +237,6 @@ void Ftylog::loadAppenders()
     setLogInitLevelFromEnv(varEnvInit);
   }
 
-  if (log4cplus::NOT_SET_LOG_LEVEL != oldLevel)
-  {
-    _logger.setLogLevel(oldLevel);
-  }
-
   //by default, load console appenders
   setConsoleAppender();
 
