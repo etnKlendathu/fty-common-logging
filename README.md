@@ -49,6 +49,7 @@ and the log4cplus level set by default then:
 | LOG_WARNING         |     WARN         |
 | LOG_INFO            |     INFO         |
 | LOG_DEBUG           |     DEBUG        |
+| LOG_TRACE           |     TRACE        |
 | LOG_OFF             |     OFF          |
 | Other               |     TRACE        |
 
