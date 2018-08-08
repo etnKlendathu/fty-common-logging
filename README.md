@@ -196,7 +196,7 @@ for more information about appenders.
 ### Verbose mode
 
 For an agent with a verbose mode, you can call the C++ class method
-`FtyLog::setVerboseMode()` (or `ftylog_setVerboseMode(Ftylog* log)`
+`Ftylog::setVerboseMode()` (or `ftylog_setVerboseMode(Ftylog* log)`
 for C code) to change the logging system :
 
 * It sets (or overwrites if existing) a `ConsoleAppender` object with
@@ -208,12 +208,12 @@ for C code) to change the logging system :
 The following C++ class functions test if a log level is included in the
 log level of the agent :
 
-* `bool FtyLog::isLogTrace()`
-* `bool FtyLog::isLogDebug()`
-* `bool FtyLog::isLogInfo()`
-* `bool FtyLog::isLogWarning()`
-* `bool FtyLog::isLogError()`
-* `bool FtyLog::isLogFatal()`
+* `bool Ftylog::isLogTrace()`
+* `bool Ftylog::isLogDebug()`
+* `bool Ftylog::isLogInfo()`
+* `bool Ftylog::isLogWarning()`
+* `bool Ftylog::isLogError()`
+* `bool Ftylog::isLogFatal()`
 
 And for C code :
 
@@ -233,12 +233,12 @@ The following methods change dynamically the logging level of the `Ftylog`
 object to a specific log level, so **only use it for testing**.
 
 This class methods are :
-* `void FtyLog::setLogLevelTrace()`
-* `void FtyLog::setLogLevelDebug()`
-* `void FtyLog::setLogLevelInfo()`
-* `void FtyLog::setLogLevelWarning()`
-* `void FtyLog::setLogLevelError()`
-* `void FtyLog::setLogLevelFatal()`
+* `void Ftylog::setLogLevelTrace()`
+* `void Ftylog::setLogLevelDebug()`
+* `void Ftylog::setLogLevelInfo()`
+* `void Ftylog::setLogLevelWarning()`
+* `void Ftylog::setLogLevelError()`
+* `void Ftylog::setLogLevelFatal()`
 
 And for C code :
 * `void ftylog_setLogLevelTrace(Ftylog * log)`

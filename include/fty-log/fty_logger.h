@@ -185,7 +185,7 @@ public:
   //And try to load it
   void setConfigFile(std::string file);
 
-  //Change properties of the FtyLog object
+  //Change properties of the Ftylog object
   void change(std::string name,std::string configFile);
 
   //Set the logger to a specific log level
