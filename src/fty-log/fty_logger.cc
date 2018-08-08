@@ -306,6 +306,10 @@ bool Ftylog::setLogLevelFromEnvDefinite(const std::string& level)
     //If empty string, set nothing and return false
     return false;
   }
+  else if (level == "LOG_TRACE")
+  {
+    setLogLevelTrace();
+  }
   else if (level == "LOG_DEBUG")
   {
     setLogLevelDebug();
