@@ -1,5 +1,6 @@
 /*  =========================================================================
     fty-common-logging - generated layer of public API
+    Note: Customized after generation; take care upon regens
 
     Copyright (C) 2014 - 2018 Eaton
 
@@ -30,7 +31,12 @@
 //  Set up environment for the application
 
 //  External dependencies
+//  NOTE: This bit was customized after zproject generation
+#ifdef __cplusplus
 #include <log4cplus/logger.h>
+#else
+#include <log4cplus/clogger.h>
+#endif
 
 //  FTY_COMMON_LOGGING version macros for compile-time API detection
 #define FTY_COMMON_LOGGING_VERSION_MAJOR 1
