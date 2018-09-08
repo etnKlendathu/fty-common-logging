@@ -276,7 +276,7 @@ Add this block in the `project.xml` file :
     <use project = "fty-common-logging" libname = "libfty_common_logging" header="fty_log.h"
         repository = "https://github.com/42ity/fty-log.git"
         release = "master"
-        test = "fty_log_selftest" >
+        test = "fty_common_logging_selftest" >
 
         <use project = "log4cplus" header = "log4cplus/logger.h" test = "appender_test"
             repository = "https://github.com/42ity/log4cplus.git"
