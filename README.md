@@ -42,16 +42,16 @@ needed:
 with the following matching between the values of `BIOS_LOG_LEVEL`, if set,
 and the log4cplus level set by default then:
 
-|    BIOS_LOG_LEVEL   |     Log level    |
-| ------------------- | ---------------- |
-| LOG_CRIT            |     FATAL        |
-| LOG_ERR             |     ERROR        |
-| LOG_WARNING         |     WARN         |
-| LOG_INFO            |     INFO         |
-| LOG_DEBUG           |     DEBUG        |
-| LOG_TRACE           |     TRACE        |
-| LOG_OFF             |     OFF          |
-| Other               |     TRACE        |
+|    BIOS\_LOG\_LEVEL   |     Log level    |
+| --------------------- | ---------------- |
+| LOG\_CRIT             |     FATAL        |
+| LOG\_ERR              |     ERROR        |
+| LOG\_WARNING          |     WARN         |
+| LOG\_INFO             |     INFO         |
+| LOG\_DEBUG            |     DEBUG        |
+| LOG\_TRACE            |     TRACE        |
+| LOG\_OFF              |     OFF          |
+| Other                 |     TRACE        |
 
 Caller can also define a `BIOS_LOG_INIT_LEVEL` environment variable to set
 the log level for duration of initializing the logging subsystem itself or
@@ -196,7 +196,7 @@ for more information about appenders.
 ### Verbose mode
 
 For an agent with a verbose mode, you can call the C++ class method
-`Ftylog::setVerboseMode()` (or `ftylog_setVerboseMode(Ftylog* log)`
+`Ftylog::setVeboseMode()` (or `ftylog_setVeboseMode(Ftylog* log)`
 for C code) to change the logging system :
 
 * It sets (or overwrites if existing) a `ConsoleAppender` object with
