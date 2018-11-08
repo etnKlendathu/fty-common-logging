@@ -173,7 +173,6 @@ AS_IF([test x"${search_log4cplus}" = xyes], [
     PRE_SEARCH_LIBS="${LIBS}"
 
     found_pkgconfig=""
-    found_linkname=""
     PKG_CHECK_MODULES([log4cplus], [log4cplus >= 0.0.0],
     [
         PKGCFG_LIBS_PRIVATE="$PKGCFG_LIBS_PRIVATE $log4cplus_LIBS"
@@ -203,7 +202,6 @@ AS_IF([test x"${search_log4cplus}" = xyes], [
             [
                 was_log4cplus_check_lib_detected=yes
                 PKGCFG_LIBS_PRIVATE="$PKGCFG_LIBS_PRIVATE -llog4cplus"
-                found_linkname="log4cplus"
             ],
             [AC_MSG_ERROR([cannot link with -llog4cplus, install log4cplus])])
     ])
@@ -211,12 +209,12 @@ AS_IF([test x"${search_log4cplus}" = xyes], [
 dnl END of PKG_CHECK_MODULES and/or direct tests for log4cplus
     AS_CASE(["x${was_log4cplus_check_lib_detected}"],
         [xpkgcfg], [
-                AC_SUBST([pkgconfig_name_log4cplus],[${found_pkgconfig}])
+                AC_SUBST([pkgconfig_name_log4cplus],["${found_pkgconfig}"])
                 CFLAGS="${log4cplus_CFLAGS} ${CFLAGS}"
                 LIBS="${log4cplus_LIBS} ${LIBS}"
             ],
         [xyes], [
-                AC_SUBST([pkgconfig_name_log4cplus],[${found_linkname}])
+                AC_SUBST([pkgconfig_name_log4cplus],[""])
                 CFLAGS="${log4cplus_synthetic_cflags} ${CFLAGS}"
                 LDFLAGS="${log4cplus_synthetic_libs} ${LDFLAGS}"
                 LIBS="${log4cplus_synthetic_libs} ${LIBS}"
@@ -225,7 +223,7 @@ dnl END of PKG_CHECK_MODULES and/or direct tests for log4cplus
                 AC_SUBST([log4cplus_LIBS],[${log4cplus_synthetic_libs}])
             ],
         [xno], [
-                AC_SUBST([pkgconfig_name_log4cplus],[log4cplus])
+                AC_SUBST([pkgconfig_name_log4cplus],[""])
             AC_MSG_ERROR([Cannot find pkg-config metadata for log4cplus 0.0.0 or higher])
     ])
 ])
@@ -442,7 +440,7 @@ AC_CHECK_FUNCS(perror gettimeofday memset getifaddrs)
 
 
 # enable specific system integration features
-#   Project has no stable classes so enable draft API by default
+#  MANUALLY MODIFIED: Project has no stable classes so enable draft API by default
 enable_drafts=yes
 AM_CONDITIONAL([ENABLE_DRAFTS], [test x$enable_drafts != xno])
 

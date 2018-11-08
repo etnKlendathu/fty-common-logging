@@ -63,7 +63,6 @@ src/platform.h.in~
 src/stamp-h1
 src/test-suite.log
 src/.dirstamp
-src/fty-log/.dirstamp
 
 # CMake cache
 CMakeCache.txt
@@ -81,7 +80,7 @@ CMake*
 *.cmake
 
 # Repositories downloaded by CI integration scripts
-log4cplus/
+tmp-deps/
 
 # Travis build area
 tmp/
