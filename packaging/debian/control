@@ -46,7 +46,6 @@ Description: fty-common-logging development tools
  This package contains development files for fty-common-logging:
  provides common logs
 
-
 Package: fty-common-logging-dbg
 Architecture: any
 Section: debug
