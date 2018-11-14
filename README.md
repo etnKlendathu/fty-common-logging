@@ -266,14 +266,13 @@ In the main `.h` file add
 #include <fty-log/fty_logger.h>
 ```
 
-## How to compile and test using 42ITy standards
+## How to compile and test projects using fty-common-logging by 42ITy standards
 
 ### project.xml
-
 Add this block in the `project.xml` file :
 
 ````
-    <use project = "fty-common-logging" libname = "libfty_common_logging" header="fty_log.h"
+    <use project = "fty-common-logging" libname = "libfty_common_logging" header = "fty_log.h"
         repository = "https://github.com/42ity/fty-log.git"
         release = "master"
         test = "fty_common_logging_selftest" >
