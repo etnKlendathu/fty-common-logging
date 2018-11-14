@@ -63,6 +63,7 @@ src/platform.h.in~
 src/stamp-h1
 src/test-suite.log
 src/.dirstamp
+src/*/.dirstamp
 
 # CMake cache
 CMakeCache.txt
