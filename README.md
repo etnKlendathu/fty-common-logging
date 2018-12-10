@@ -268,28 +268,47 @@ In the main `.h` file add
 
 ## How to compile and test projects using fty-common-logging by 42ITy standards
 
-### project.xml
+### project.xml for C++ projects
 Add this block in the `project.xml` file :
 
 ````
-    <use project = "fty-common-logging" libname = "libfty_common_logging" header = "fty_log.h"
-        repository = "https://github.com/42ity/fty-log.git"
+    <!-- Note: pure C projects should use fty-log/fty_logger.h, C++ use fty_log.h -->
+    <use project = "fty-common-logging" libname = "libfty_common_logging"
+        header = "fty_log.h"
+        repository = "https://github.com/42ity/fty-common-logging.git"
         release = "master"
         test = "fty_common_logging_selftest" >
 
-        <use project = "log4cplus" header = "log4cplus/logger.h" test = "appender_test"
+        <!-- Note: pure C projects should use clogger.h, C++ use logger.h -->
+        <use project = "log4cplus"
+            header = "log4cplus/logger.h"
+            test = "appender_test"
             repository = "https://github.com/42ity/log4cplus.git"
             release = "1.1.2-FTY-master"
             />
     </use>
 ````
 
-NOTE: The `header` value must be changed from `fty_log.h` to
-`fty-log/fty_logger.h` for a C project.
+### project.xml for pure-C projects
+Add this block in the `project.xml` file :
 
-NOTE: In this `use` section, remove the dependecy already needed directly
-by the particular agent/library whose project you are configuring, to
-simplify maintenance of the configuration later.
+````
+    <!-- Note: pure C projects should use fty-log/fty_logger.h, C++ use fty_log.h -->
+    <use project = "fty-common-logging" libname = "libfty_common_logging"
+        header = "fty-log/fty_logger.h"
+        repository = "https://github.com/42ity/fty-common-logging.git"
+        release = "master"
+        test = "fty_common_logging_selftest" >
+
+        <!-- Note: pure C projects should use clogger.h, C++ use logger.h -->
+        <use project = "log4cplus"
+            header = "log4cplus/clogger.h"
+            test = "appender_test"
+            repository = "https://github.com/42ity/log4cplus.git"
+            release = "1.1.2-FTY-master"
+            />
+    </use>
+````
 
 ### How to pass Travis CI checks
 
