@@ -269,7 +269,7 @@ In the main `.h` file add
 ## How to compile and test projects using fty-common-logging by 42ITy standards
 
 ### project.xml for C++ projects
-Add this block in the `project.xml` file :
+Add this top-level block in the `project.xml` file :
 
 ````
     <!-- Note: pure C projects should use fty-log/fty_logger.h, C++ use fty_log.h -->
@@ -290,7 +290,7 @@ Add this block in the `project.xml` file :
 ````
 
 ### project.xml for pure-C projects
-Add this block in the `project.xml` file :
+Add this top-level block in the `project.xml` file :
 
 ````
     <!-- Note: pure C projects should use fty-log/fty_logger.h, C++ use fty_log.h -->
