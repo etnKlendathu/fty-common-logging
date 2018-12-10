@@ -267,13 +267,13 @@ void Ftylog::loadAppenders()
   }
   else
   {
-    log_warning_log(this,"No log configuration file defined");
+    log_trace_log(this,"No log configuration file defined");
   }
 
   //if no file or file not valid, set default ConsoleAppender
   if (loadFile)
   {
-    log_info_log(this,"Load Config file %s ",_configFile.c_str());
+    log_trace_log(this,"Load Config file %s ",_configFile.c_str());
 
     //Remove previous appender
     _logger.removeAllAppenders();
@@ -290,7 +290,7 @@ void Ftylog::loadAppenders()
   }
   else
   {
-    log_info_log(this,"No log configuration file was loaded, will log to stderr by default");
+    log_trace_log(this,"No log configuration file was loaded, will log to stderr by default");
     if (log4cplus::NOT_SET_LOG_LEVEL != oldLevel)
     {
       _logger.setLogLevel(oldLevel);
