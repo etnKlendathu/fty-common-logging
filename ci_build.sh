@@ -189,7 +189,7 @@ default|default-Werror|default-with-docs|valgrind|clang-format-check)
         BASE_PWD=${PWD}
         echo "`date`: INFO: Building prerequisite 'log4cplus' from Git repository..." >&2
         cd ./tmp-deps
-        $CI_TIME git clone --quiet --depth 1 -b 1.1.2-FTY-master https://github.com/42ity/log4cplus.git log4cplus
+        $CI_TIME git clone --quiet --depth 1 -b release/IPM-2.0.0 https://github.com/42ity/log4cplus.git log4cplus
         cd ./log4cplus
         CCACHE_BASEDIR=${PWD}
         export CCACHE_BASEDIR
