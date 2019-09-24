@@ -22,7 +22,7 @@
         <option name = "require_gitignore" value = "1" />
     </target>
     <target name = "jenkins" >
-        <option name = "agent_label" value = "devel-image-ipm_2.0.0 &amp;&amp; x86_64" />
+        <option name = "agent_label" value = "devel-image-ipm_2.0.1 &amp;&amp; x86_64" />
         <option name = "triggers_pollSCM" value = "H/2 * * * *" />
         <option name = "test_cppcheck" value = "1" />
         <option name = "build_docs" value = "1" />
@@ -45,7 +45,7 @@
     <use project = "log4cplus" header = "log4cplus/logger.h"
         test = "appender_test"
         repository = "https://github.com/42ity/log4cplus.git"
-        release = "release/IPM-2.0.0"
+        release = "release/IPM-2.0.1"
         />
 
     <class name = "fty-log/fty_logger" selftest = "0" stable = "1">Log management</class>
