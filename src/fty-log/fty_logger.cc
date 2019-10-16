@@ -45,11 +45,13 @@ using namespace log4cplus::helpers;
 //constructor
 Ftylog::Ftylog(std::string component, std::string configFile)
 {
+  _watchConfigFile = NULL;
   init(component,configFile);
 }
 
 Ftylog::Ftylog()
 {
+    _watchConfigFile = NULL;
     std::ostringstream threadId;
     threadId <<  std::this_thread::get_id();
     std::string name = "log-default-" + threadId.str();
@@ -444,7 +446,7 @@ bool Ftylog::isLogOff()
 void Ftylog::insertLog(log4cplus::LogLevel level, const char* file, int line,
                        const char* func, const char* format, va_list args)
 {
-  char *buffer;
+  char *buffer = NULL;
   int r;
 
   //Check if the level of this log is included in the log level
@@ -488,7 +490,7 @@ void Ftylog::insertLog(log4cplus::LogLevel level, const char* file, int line,
 //manageftylog section
 ////////////////////////
 
-Ftylog ManageFtyLog::_ftylogdefault=Ftylog();
+Ftylog ManageFtyLog::_ftylogdefault = Ftylog("ftylog", FTY_COMMON_LOGGING_DEFAULT_CFG);
 
 Ftylog* ManageFtyLog::getInstanceFtylog()
 {

@@ -1,6 +1,5 @@
 /*  =========================================================================
     fty-common-logging - generated layer of public API
-    Note: Customized after generation; take care upon regens
 
     Copyright (C) 2014 - 2018 Eaton
 
