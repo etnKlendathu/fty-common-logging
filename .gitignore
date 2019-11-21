@@ -1,6 +1,8 @@
 # This is a skeleton created by zproject.
 # You can add hand-written code here.
-### Note: Customized after generation; take care upon regens
+### Note: General ignorance of CMake files has been added in gitignore; take care upon regens
+### Note: This file is customized to add .dirstamp ignorance
+src/fty-log/*.dirstamp
 
 save.xml
 # Object files
@@ -62,7 +64,6 @@ src/platform.h.in~
 src/stamp-h1
 src/test-suite.log
 src/.dirstamp
-src/*/.dirstamp
 
 # CMake cache
 CMakeCache.txt
@@ -73,11 +74,6 @@ compile_commands.json
 DartConfiguration.tcl
 install_manifest.txt
 Testing/
-
-# CMake in general
-builds/cmake/
-CMake*
-*.cmake
 
 # Repositories downloaded by CI integration scripts
 tmp-deps/
@@ -136,3 +132,7 @@ nbproject/
 
 # editor backups
 *~
+# CMake in general
+builds/cmake/
+CMake*
+*.cmake
