@@ -22,9 +22,17 @@
 #ifndef FTY_LOG_H_H_INCLUDED
 #define FTY_LOG_H_H_INCLUDED
 
-//  Include the project library file
+
+#ifdef __cplusplus
+//  log4cplus
+#include <log4cplus/logger.h>
 #include "fty_common_logging_library.h"
 
-//  Add your own public definitions here, if you need them
+#else
+//  log4cplus
+#include <log4cplus/clogger.h>
+#include "fty-log/fty_logger.h"
+
+#endif
 
 #endif

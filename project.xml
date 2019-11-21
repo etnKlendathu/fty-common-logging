@@ -12,6 +12,7 @@
     <target name = "debian" />
     <target name = "redhat" />
     <target name = "travis" >
+        <option name = "recursive_dependencies" value = "true" />
         <!-- option name = "clangformat_implem" value = "autotools" / -->
         <option name = "use_cmake" value = "0" />
         <option name = "dist" value = "trusty" />
@@ -42,10 +43,9 @@
     <version major = "1" minor = "0" patch = "0" />
     <abi current = "1" revision = "0" age = "0" />
 
-    <use project = "log4cplus" header = "log4cplus/logger.h"
+    <use project = "log4cplus" 
         test = "appender_test"
         repository = "https://github.com/42ity/log4cplus.git"
-        release = "1.1.2-FTY-master"
         />
 
     <class name = "fty-log/fty_logger" selftest = "0" stable = "1">Log management</class>
