@@ -52,7 +52,10 @@ if ! (command -v dpkg-query >/dev/null 2>&1 && dpkg-query --list log4cplus-dev >
     if [ -e ci_dependencies.sh ]; then
         PROPAGATED_BRANCH="`git branch | grep * | cut -d ' ' -f2`"
         DEFAULT_BRANCH="`git symbolic-ref refs/remotes/origin/HEAD | sed 's@^refs/remotes/origin/@@'`"
-        if [ "x$PROPAGATED_BRANCH" = "x$PROPAGATED_BRANCH" ]; then
+        if [ "x$REQUESTED_BRANCH" = "x" ]; then
+            echo "`date`: INFO: Building prerequisites of 'log4cplus' using ci_dependencies.sh the default branch..." >&2
+            ($CI_TIME source ./ci_dependencies.sh)
+        elif [ "x$PROPAGATED_BRANCH" = "x$DEFAULT_BRANCH" ]; then
             echo "`date`: INFO: Building prerequisites of 'log4cplus' using ci_dependencies.sh the default branch..." >&2
             ($CI_TIME source ./ci_dependencies.sh)
         else
