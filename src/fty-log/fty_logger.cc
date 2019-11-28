@@ -143,7 +143,7 @@ void Ftylog::setConsoleAppender()
   // Note: the first bool argument controls logging to stderr(true) as output stream
   SharedObjectPtr<log4cplus::Appender> append(new log4cplus::ConsoleAppender(true, true));
   //Create and affect layout
-  append->setLayout(std::auto_ptr<log4cplus::Layout> (new log4cplus::PatternLayout(_layoutPattern)));
+  append->setLayout(std::unique_ptr<log4cplus::Layout> (new log4cplus::PatternLayout(_layoutPattern)));
   append.get()->setName(LOG4CPLUS_TEXT("Console" + this->_agentName));
 
   //Add appender to logger
@@ -191,7 +191,7 @@ void Ftylog::setVeboseMode()
   //create and add the appender
   SharedObjectPtr<log4cplus::Appender> append(new log4cplus::ConsoleAppender(false, true));
   //Create and affect layout
-  append->setLayout(std::auto_ptr<log4cplus::Layout> (new log4cplus::PatternLayout(_layoutPattern)));
+  append->setLayout(std::unique_ptr<log4cplus::Layout> (new log4cplus::PatternLayout(_layoutPattern)));
   append.get()->setName(LOG4CPLUS_TEXT("Verbose-" + this->_agentName));
   //Add verbose appender to logger
   _logger.addAppender(append);
