@@ -40,48 +40,71 @@
 #define CXXTOOLS_LOG_CXXTOOLS_H
 #endif
 
+#ifdef log_macro
+// Old logger is used
+#undef log_macro
+#undef log_trace_log
+#undef log_debug_log
+#undef log_info_log
+#undef log_warning_log
+#undef log_error_log
+#undef log_fatal_log
+#undef log_trace
+#undef log_debug
+#undef log_info
+#undef log_warning
+#undef log_error
+#undef log_fatal
+#undef FTY_COMMON_LOGGING_DEFAULT_CFG
+#endif
+
 #define log_macro(level, ftylogger, ...)                                                                     \
     do {                                                                                                     \
-        ftylogger.insertLog((level), __FILE__, __LINE__, __func__, __VA_ARGS__);                            \
+        ftylogger.insertLog((level), __FILE__, __LINE__, __func__, __VA_ARGS__);                             \
     } while (0)
 
 /// Logging with explicit logger
 /// Prints message with TRACE level.
-#define log_trace_log(ftylogger, ...) log_macro(Ftylog::Level::Trace, ftylogger, __VA_ARGS__)
+#define log_trace_log(ftylogger, ...) log_macro(fty::Ftylog::Level::Trace, ftylogger, __VA_ARGS__)
 
 /// Prints message with DEBUG level.
-#define log_debug_log(ftylogger, ...) log_macro(Ftylog::Level::Debug, ftylogger, __VA_ARGS__)
+#define log_debug_log(ftylogger, ...) log_macro(fty::Ftylog::Level::Debug, ftylogger, __VA_ARGS__)
 
 /// Prints message with INFO level.
-#define log_info_log(ftylogger, ...) log_macro(Ftylog::Level::Info, ftylogger, __VA_ARGS__)
+#define log_info_log(ftylogger, ...) log_macro(fty::Ftylog::Level::Info, ftylogger, __VA_ARGS__)
 
 /// Prints message with WARNING level.
-#define log_warning_log(ftylogger, ...) log_macro(Ftylog::Level::Warn, ftylogger, __VA_ARGS__)
+#define log_warning_log(ftylogger, ...) log_macro(fty::Ftylog::Level::Warn, ftylogger, __VA_ARGS__)
 
 /// Prints message with ERROR level.
-#define log_error_log(ftylogger, ...) log_macro(Ftylog::Level::Error, ftylogger, __VA_ARGS__)
+#define log_error_log(ftylogger, ...) log_macro(fty::Ftylog::Level::Error, ftylogger, __VA_ARGS__)
 
 /// Prints message with FATAL level.
-#define log_fatal_log(ftylogger, ...) log_macro(Ftylog::Level::Fatal, ftylogger, __VA_ARGS__)
+#define log_fatal_log(ftylogger, ...) log_macro(fty::Ftylog::Level::Fatal, ftylogger, __VA_ARGS__)
 
 /// Logging with default logger
 /// Prints message with TRACE level.
-#define log_trace(...) log_macro(Ftylog::Level::Trace, ManageFtyLog::getInstanceFtylog(), __VA_ARGS__)
+#define log_trace(...)                                                                                       \
+    log_macro(fty::Ftylog::Level::Trace, fty::ManageFtyLog::getInstanceFtylog(), __VA_ARGS__)
 
 /// Prints message with DEBUG level.
-#define log_debug(...) log_macro(Ftylog::Level::Debug, ManageFtyLog::getInstanceFtylog(), __VA_ARGS__)
+#define log_debug(...)                                                                                       \
+    log_macro(fty::Ftylog::Level::Debug, fty::ManageFtyLog::getInstanceFtylog(), __VA_ARGS__)
 
 /// Prints message with INFO level.
-#define log_info(...) log_macro(Ftylog::Level::Info, ManageFtyLog::getInstanceFtylog(), __VA_ARGS__)
+#define log_info(...) log_macro(fty::Ftylog::Level::Info, fty::ManageFtyLog::getInstanceFtylog(), __VA_ARGS__)
 
 /// Prints message with WARNING level.
-#define log_warning(...) log_macro(Ftylog::Level::Warn, ManageFtyLog::getInstanceFtylog(), __VA_ARGS__)
+#define log_warning(...)                                                                                     \
+    log_macro(fty::Ftylog::Level::Warn, fty::ManageFtyLog::getInstanceFtylog(), __VA_ARGS__)
 
 /// Prints message with ERROR level.
-#define log_error(...) log_macro(Ftylog::Level::Error, ManageFtyLog::getInstanceFtylog(), __VA_ARGS__)
+#define log_error(...)                                                                                       \
+    log_macro(fty::Ftylog::Level::Error, fty::ManageFtyLog::getInstanceFtylog(), __VA_ARGS__)
 
 /// Prints message with FATAL level.
-#define log_fatal(...) log_macro(Ftylog::Level::Fatal, ManageFtyLog::getInstanceFtylog(), __VA_ARGS__)
+#define log_fatal(...)                                                                                       \
+    log_macro(fty::Ftylog::Level::Fatal, fty::ManageFtyLog::getInstanceFtylog(), __VA_ARGS__)
 
 #define LOG_START             log_debug("start")
 #define LOG_END               log_debug("end::normal")
@@ -89,6 +112,8 @@
 
 // Default layout pattern
 #define LOGPATTERN "%c [%t] -%-5p- %M (%l) %m%n"
+
+namespace fty {
 
 class Ftylog
 {
@@ -187,3 +212,5 @@ public:
     /// Creates or replaces the Ftylog object in the instance using a new Ftylog object
     static void setInstanceFtylog(const std::string& componentName, const std::string& logConfigFile = {});
 };
+
+} // namespace fty

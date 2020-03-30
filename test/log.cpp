@@ -1,23 +1,23 @@
+#include "fty/fty-log.h"
 #include <catch2/catch.hpp>
-#include "include/fty-log.h"
 #include <iostream>
 
 struct MyStruct
 {
     std::string val;
-    int num;
+    int         num;
 
-    Logger& operator<<(Logger& log) const
+    fty::Logger& operator<<(fty::Logger& log) const
     {
-        log << Logger::nowhitespace() << "MyStruct{val = " << val << "; num = " << num << "}";
+        log << fty::Logger::nowhitespace() << "MyStruct{val = " << val << "; num = " << num << "}";
         return log;
     }
 };
 
 TEST_CASE("Log test")
 {
-    Logger::Log currentLog;
-    Logger::setCallback([&](const Logger::Log& log){
+    fty::Logger::Log currentLog;
+    fty::Logger::setCallback([&](const fty::Logger::Log& log) {
         currentLog = log;
     });
 
@@ -25,14 +25,15 @@ TEST_CASE("Log test")
     {
         logDbg() << "Dead Parrot";
 
-        REQUIRE(Ftylog::Level::Debug == currentLog.level);
+        REQUIRE(fty::Ftylog::Level::Debug == currentLog.level);
         REQUIRE("Dead Parrot" == currentLog.content);
         REQUIRE(__FILE__ == currentLog.file);
     }
 
     SECTION("Test whitespace")
     {
-        logDbg() << "Norwegian" << "Blue";
+        logDbg() << "Norwegian"
+                 << "Blue";
 
         REQUIRE("Norwegian Blue" == currentLog.content);
     }
@@ -68,7 +69,7 @@ TEST_CASE("Log test")
         std::stringstream ss;
         ss << std::hex << &currentLog;
 
-        REQUIRE(Ftylog::Level::Debug == currentLog.level);
+        REQUIRE(fty::Ftylog::Level::Debug == currentLog.level);
         REQUIRE(ss.str() == currentLog.content);
         REQUIRE(__FILE__ == currentLog.file);
     }
@@ -76,7 +77,7 @@ TEST_CASE("Log test")
     SECTION("Test condition")
     {
         bool runned = false;
-        auto caller = [&](){
+        auto caller = [&]() {
             runned = true;
             return "It's dead, that's what's wrong with it.";
         };
@@ -111,4 +112,45 @@ TEST_CASE("Log test")
         logDbg() << MyStruct{"is no more", 42};
         REQUIRE("MyStruct{val = is no more; num = 42}" == currentLog.content);
     }
+}
+
+enum class Test
+{
+    One,
+    Two
+};
+
+namespace fty {
+template<>
+std::string convert(const Test& test)
+{
+    switch (test) {
+    case Test::One: return "One";
+    case Test::Two: return "Two";
+    }
+}
+
+template<>
+Test convert(const std::string& test)
+{
+    std::string_view view(test);
+    if (view == "One") {
+        return Test::One;
+    } else if (view == "Two"){
+        return Test::Two;
+    }
+    return {};
+}
+
+}
+
+TEST_CASE("Enums")
+{
+    fty::Logger::Log currentLog;
+    fty::Logger::setCallback([&](const fty::Logger::Log& log) {
+        currentLog = log;
+    });
+
+    logDbg() << Test::One;
+    CHECK("One" == currentLog.content);
 }

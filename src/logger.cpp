@@ -19,7 +19,7 @@
     =========================================================================
  */
 
-#include "include/fty_logger.h"
+#include "fty/fty_logger.h"
 #include <fstream>
 #include <log4cplus/appender.h>
 #include <log4cplus/configurator.h>
@@ -35,6 +35,7 @@
 #include <typeinfo>
 #include <unistd.h>
 
+namespace fty {
 
 class Ftylog::Impl
 {
@@ -531,3 +532,5 @@ void ManageFtyLog::setInstanceFtylog(const std::string& componentName, const std
 }
 
 // ===========================================================================================================
+
+}

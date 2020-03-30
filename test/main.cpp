@@ -1,10 +1,10 @@
 #define CATCH_CONFIG_MAIN
 #include <catch2/catch.hpp>
-#include "include/fty_logger.h"
+#include "fty/fty_logger.h"
 
 TEST_CASE("Logger testing")
 {
-    ManageFtyLog::getInstanceFtylog().setLogLevelTrace();
+    fty::ManageFtyLog::getInstanceFtylog().setLogLevelTrace();
     log_trace("This is a simple %s log with default logger", "trace");
     log_debug("This is a simple %s log with default logger", "debug");
     log_info("This is a simple %s log with default logger", "info");
@@ -13,8 +13,8 @@ TEST_CASE("Logger testing")
     log_fatal("This is a simple %s log with default logger", "fatal");
 
 
-    ManageFtyLog::setInstanceFtylog("fty-log-agent");
-    Ftylog& test = ManageFtyLog::getInstanceFtylog();
+    fty::ManageFtyLog::setInstanceFtylog("fty-log-agent");
+    fty::Ftylog& test = fty::ManageFtyLog::getInstanceFtylog();
 
     SECTION("Check trace level")
     {
