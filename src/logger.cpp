@@ -501,18 +501,9 @@ bool Ftylog::isLogOff() const
     return m_impl->_logger.getLogLevel() == log4cplus::OFF_LOG_LEVEL;
 }
 
-void Ftylog::insertLog(Level level, const char* file, int line, const char* func, const char* format, ...)
+void Ftylog::insertLog(Level level, const char* file, int line, const char* func, const std::string& str)
 {
-    va_list args;
-    va_start(args, format);
-    va_list args2;
-    va_copy(args2, args);
-    std::string buff;
-    buff.resize(size_t(std::vsnprintf(nullptr, 0, format, args)+1));
-    va_end(args);
-    std::vsnprintf(buff.data(), buff.size(), format, args2);
-    va_end(args2);
-    m_impl->insertLog(level, file, line, func, buff);
+    m_impl->insertLog(level, file, line, func, str);
 }
 
 // ===========================================================================================================

@@ -60,7 +60,11 @@
 
 #define log_macro(level, ftylogger, ...)                                                                     \
     do {                                                                                                     \
-        ftylogger.insertLog((level), __FILE__, __LINE__, __func__, __VA_ARGS__);                             \
+        std::string buf;                                                                                     \
+        auto        size = std::snprintf(nullptr, 0, __VA_ARGS__) + 1;                                       \
+        buf.resize(size_t(size));                                                                            \
+        std::snprintf(buf.data(), buf.size(), __VA_ARGS__);                                                  \
+        ftylogger.insertLog((level), __FILE__, __LINE__, __func__, buf);                                     \
     } while (0)
 
 /// Logging with explicit logger
@@ -171,8 +175,8 @@ public:
     /// \param file - name of file issued print, usually content of __FILE__ macro
     /// \param line - number of line, usually content of __LINE__ macro
     /// \param func - name of function issued log, usually content of __func__ macro
-    /// \param format - printf-like format string
-    void insertLog(Level level, const char* file, int line, const char* func, const char* format, ...);
+    /// \param str - string to output
+    void insertLog(Level level, const char* file, int line, const char* func, const std::string& str);
 
     /// Load a specific appender if verbose mode is set to true :
     /// -Save the logger logging level and set it to TRACE logging level
