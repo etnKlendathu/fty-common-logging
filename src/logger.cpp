@@ -510,16 +510,15 @@ void Ftylog::insertLog(Level level, const char* file, int line, const char* func
 // ManageFtyLog section
 // ===========================================================================================================
 
-Ftylog ManageFtyLog::_ftylogdefault = Ftylog("ftylog", FTY_COMMON_LOGGING_DEFAULT_CFG);
-
 Ftylog& ManageFtyLog::getInstanceFtylog()
 {
-    return _ftylogdefault;
+    static Ftylog inst("ftylog", FTY_COMMON_LOGGING_DEFAULT_CFG);
+    return inst;
 }
 
 void ManageFtyLog::setInstanceFtylog(const std::string& componentName, const std::string& logConfigFile)
 {
-    _ftylogdefault.change(componentName, logConfigFile);
+    getInstanceFtylog().change(componentName, logConfigFile);
 }
 
 // ===========================================================================================================

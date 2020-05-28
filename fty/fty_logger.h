@@ -205,7 +205,6 @@ private:
     /// Avoid use of the following procedures/functions
     ManageFtyLog(const ManageFtyLog&) = delete;
     ManageFtyLog& operator=(const ManageFtyLog&) = delete;
-    static Ftylog _ftylogdefault;
 
 public:
     static constexpr const char* FTY_COMMON_LOGGING_DEFAULT_CFG = "/etc/fty/ftylog.cfg";

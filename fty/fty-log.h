@@ -35,13 +35,14 @@ namespace fty {
 
 class Logger;
 
-template<typename T, typename = void>
+template <typename T, typename = void>
 struct has_stream_op : public std::false_type
 {
 };
 
 template <typename T>
-struct has_stream_op<T, std::void_t<decltype(std::declval<T>().operator<<(std::declval<Logger&>()))>> : public std::true_type
+struct has_stream_op<T, std::void_t<decltype(std::declval<T>().operator<<(std::declval<Logger&>()))>>
+    : public std::true_type
 {
 };
 
